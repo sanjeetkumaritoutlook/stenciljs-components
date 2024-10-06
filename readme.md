@@ -2,10 +2,12 @@
 
 # To start using components from this Library
 for example in Angular: 
+```bash
 npm i stenciljs-components
+```
 then in main.ts:
-import { defineCustomElements } from 'stenciljs-components/loader';
 ```tsx
+import { defineCustomElements } from 'stenciljs-components/loader';
 // Initialize the custom elements
 defineCustomElements(window);
 ```
@@ -21,6 +23,14 @@ such as:
 ```html
 <my-card user-name="CodingLocker"></my-card>
 <my-pie-chart  data='[{"tag":"height","value":180},{"tag":"weight","value":75},{"tag":"age","value":30},{"tag":"score","value":95},{"tag":"yearsExperience","value":5}]'></my-pie-chart>
+<my-rich-text-editor initial-value="this is initial value" placeholder="angular placeholder"></my-rich-text-editor>
+<my-progress-bar value="2" max="10"></my-progress-bar>
+<my-progress-ring percentage="30"></my-progress-ring>
+<test-button button-id="test-button">Click me!</test-button>
+ <test-counter>Number: </test-counter>
+ <search-world search-text="bmw"> </search-world> 
+ <my-payment-gateway></my-payment-gateway>
+ <my-component first="Sanjeet" last="Kumar"></my-component>
 ```
 
 
