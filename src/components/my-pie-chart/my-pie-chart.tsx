@@ -17,7 +17,7 @@ export class MyPieChart {
   @Element() element: HTMLElement;
   @Prop() width: number = 400;
   @Prop() height: number = 400;
-  @Prop() data: string = "[]";
+  @Prop() data: string = "[]"; //data to be taken in json format
 
   public chartData: any;
 
@@ -80,7 +80,7 @@ export class MyPieChart {
   render() {
     return  (
       <Host>
-        <h1>d3.js component</h1>
+        <h1> JSON format where each entry contains only tag and value (in numbers) as keys:</h1>
         <svg class="chart"/>
       </Host>
     )
