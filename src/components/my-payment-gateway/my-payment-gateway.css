@@ -1,0 +1,17 @@
+:host {
+  display: block;
+}
+#card-element {
+  width: 100%;
+  height: 40px; /* Or whatever height you want */
+  border: 1px solid #ccc; /* Optional for debugging visibility */
+  padding: 10px;
+}
+
+.stripe-pay {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}

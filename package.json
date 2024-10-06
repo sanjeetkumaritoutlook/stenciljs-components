@@ -46,5 +46,11 @@
     "jest-cli": "^29.7.0",
     "puppeteer": "^21.9.0"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@stripe/stripe-js": "^4.7.0",
+    "d3": "^7.9.0",
+    "easing-animation-frames": "^1.0.6",
+    "tinymce": "^7.3.0"
+  }
 }

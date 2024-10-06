@@ -7,8 +7,35 @@
 
     <script type="module" src="/build/stenciljs-components.esm.js"></script>
     <script nomodule src="/build/stenciljs-components.js"></script>
+    
   </head>
   <body>
     <my-component first="Stencil" middle="'Don't call me a framework'" last="JS"></my-component>
+    <my-progress-bar value="40"></my-progress-bar>
+    <my-progress-bar value="2" max="10"></my-progress-bar>
+    <my-rich-text-editor initial-value="this is initial value" placeholder="sanjeet rte mvp"></my-rich-text-editor>
+   <my-progress-ring percentage="30"></my-progress-ring>
+   <my-progress-ring percentage="60" round-linecap="true"></my-progress-ring>
+   <my-progress-ring percentage="90" disable-digits="true" event-id="ring1">
+     <p class="completed-count">9/10<br>Complete</p>
+   </my-progress-ring>
+   <script>
+     // Callback function to run when the animation finishes
+     const completeEventCallback = (event) => {
+       if (event.detail.id !== "ring1") {
+         return;
+       }
+       console.log("completed")
+     };
+ 
+     // Register eventLiteners
+     document.addEventListener("prcComplete", completeEventCallback);
+   </script>
+   <my-card user-name="CodingLocker"></my-card>
+   <search-world search-text="bmw"> </search-world>
+   <test-button button-id="test-button">Click me!</test-button>
+   <test-counter>Number: </test-counter>
+   <my-pie-chart style="margin: 200px;" data='[{"value": 2, "tag": "Netflix"}, {"value": 5, "tag": "Comida"}, {"value": 8, "tag": "Alquiler"}, {"value": 2, "tag": "Gasolina"}, {"value": 5, "tag": "Ropa"}]'></my-pie-chart>
+   <my-payment-gateway></my-payment-gateway>
   </body>
 </html>

@@ -5,7 +5,14 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { EasingType } from "easing-animation-frames";
+import { ColorChangeEventPayload, EventPayload, ProgressEventPayload } from "./components/my-progress-ring/my-progress-ring";
+export { EasingType } from "easing-animation-frames";
+export { ColorChangeEventPayload, EventPayload, ProgressEventPayload } from "./components/my-progress-ring/my-progress-ring";
 export namespace Components {
+    interface MyCard {
+        "userName": string;
+    }
     interface MyComponent {
         /**
           * The first name
@@ -20,19 +27,237 @@ export namespace Components {
          */
         "middle": string;
     }
+    interface MyPaymentGateway {
+    }
+    interface MyPieChart {
+        "data": string;
+        "height": number;
+        "width": number;
+    }
+    interface MyProgressBar {
+        "max": number;
+        "value": number;
+    }
+    interface MyProgressRing {
+        /**
+          * Color steps of the ring
+         */
+        "colors": string | Map<number, string>;
+        /**
+          * Font size of the decimal places
+         */
+        "decimalSize": number;
+        /**
+          * Hide decimal places
+         */
+        "disableDecimals": boolean;
+        /**
+          * Hide digits
+         */
+        "disableDigits": boolean;
+        /**
+          * Animation duration in miliseconds
+         */
+        "duration": number;
+        /**
+          * Easing animation function name
+         */
+        "easingType": EasingType;
+        /**
+          * Unique ID for the event listeners
+         */
+        "eventId"?: string;
+        /**
+          * Font size of the integer
+         */
+        "intSize": number;
+        /**
+          * Inverts the color scheme
+         */
+        "invertColors": boolean;
+        /**
+          * Percentage value (mandatory)
+         */
+        "percentage": number;
+        /**
+          * Radius of the ring
+         */
+        "radius": number;
+        /**
+          * Addes rounded linecap to the ring
+         */
+        "roundLinecap": boolean;
+        /**
+          * Thickness of the ring
+         */
+        "strokeWidth": number;
+    }
+    interface MyRichTextEditor {
+        "disableQuickbars": boolean;
+        "disabled": boolean;
+        "initialValue": string;
+        /**
+          * Optional placeholder text displayed when the form field is empty.
+         */
+        "placeholder": string;
+    }
+    interface SearchWorld {
+        "searchText": string;
+    }
+    interface TestButton {
+        "buttonId": string;
+        "color": 'red' | 'green';
+    }
+    interface TestCounter {
+    }
+}
+export interface MyProgressRingCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLMyProgressRingElement;
+}
+export interface MyRichTextEditorCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLMyRichTextEditorElement;
+}
+export interface SearchWorldCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSearchWorldElement;
+}
+export interface TestButtonCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLTestButtonElement;
 }
 declare global {
+    interface HTMLMyCardElement extends Components.MyCard, HTMLStencilElement {
+    }
+    var HTMLMyCardElement: {
+        prototype: HTMLMyCardElement;
+        new (): HTMLMyCardElement;
+    };
     interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
     }
     var HTMLMyComponentElement: {
         prototype: HTMLMyComponentElement;
         new (): HTMLMyComponentElement;
     };
+    interface HTMLMyPaymentGatewayElement extends Components.MyPaymentGateway, HTMLStencilElement {
+    }
+    var HTMLMyPaymentGatewayElement: {
+        prototype: HTMLMyPaymentGatewayElement;
+        new (): HTMLMyPaymentGatewayElement;
+    };
+    interface HTMLMyPieChartElement extends Components.MyPieChart, HTMLStencilElement {
+    }
+    var HTMLMyPieChartElement: {
+        prototype: HTMLMyPieChartElement;
+        new (): HTMLMyPieChartElement;
+    };
+    interface HTMLMyProgressBarElement extends Components.MyProgressBar, HTMLStencilElement {
+    }
+    var HTMLMyProgressBarElement: {
+        prototype: HTMLMyProgressBarElement;
+        new (): HTMLMyProgressBarElement;
+    };
+    interface HTMLMyProgressRingElementEventMap {
+        "prcProgress": ProgressEventPayload;
+        "prcColor": ColorChangeEventPayload;
+        "prcStart": EventPayload;
+        "prcComplete": EventPayload;
+        "prcStop": EventPayload;
+        "prcResume": EventPayload;
+        "prcRestart": EventPayload;
+    }
+    interface HTMLMyProgressRingElement extends Components.MyProgressRing, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLMyProgressRingElementEventMap>(type: K, listener: (this: HTMLMyProgressRingElement, ev: MyProgressRingCustomEvent<HTMLMyProgressRingElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLMyProgressRingElementEventMap>(type: K, listener: (this: HTMLMyProgressRingElement, ev: MyProgressRingCustomEvent<HTMLMyProgressRingElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLMyProgressRingElement: {
+        prototype: HTMLMyProgressRingElement;
+        new (): HTMLMyProgressRingElement;
+    };
+    interface HTMLMyRichTextEditorElementEventMap {
+        "valueChange": string;
+        "editorFocus": void;
+        "editorBlur": void;
+        "contentChanged": any;
+    }
+    interface HTMLMyRichTextEditorElement extends Components.MyRichTextEditor, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLMyRichTextEditorElementEventMap>(type: K, listener: (this: HTMLMyRichTextEditorElement, ev: MyRichTextEditorCustomEvent<HTMLMyRichTextEditorElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLMyRichTextEditorElementEventMap>(type: K, listener: (this: HTMLMyRichTextEditorElement, ev: MyRichTextEditorCustomEvent<HTMLMyRichTextEditorElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLMyRichTextEditorElement: {
+        prototype: HTMLMyRichTextEditorElement;
+        new (): HTMLMyRichTextEditorElement;
+    };
+    interface HTMLSearchWorldElementEventMap {
+        "searchWorldNameSelected": string;
+    }
+    interface HTMLSearchWorldElement extends Components.SearchWorld, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSearchWorldElementEventMap>(type: K, listener: (this: HTMLSearchWorldElement, ev: SearchWorldCustomEvent<HTMLSearchWorldElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSearchWorldElementEventMap>(type: K, listener: (this: HTMLSearchWorldElement, ev: SearchWorldCustomEvent<HTMLSearchWorldElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLSearchWorldElement: {
+        prototype: HTMLSearchWorldElement;
+        new (): HTMLSearchWorldElement;
+    };
+    interface HTMLTestButtonElementEventMap {
+        "buttonClicked": any;
+    }
+    interface HTMLTestButtonElement extends Components.TestButton, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLTestButtonElementEventMap>(type: K, listener: (this: HTMLTestButtonElement, ev: TestButtonCustomEvent<HTMLTestButtonElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLTestButtonElementEventMap>(type: K, listener: (this: HTMLTestButtonElement, ev: TestButtonCustomEvent<HTMLTestButtonElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLTestButtonElement: {
+        prototype: HTMLTestButtonElement;
+        new (): HTMLTestButtonElement;
+    };
+    interface HTMLTestCounterElement extends Components.TestCounter, HTMLStencilElement {
+    }
+    var HTMLTestCounterElement: {
+        prototype: HTMLTestCounterElement;
+        new (): HTMLTestCounterElement;
+    };
     interface HTMLElementTagNameMap {
+        "my-card": HTMLMyCardElement;
         "my-component": HTMLMyComponentElement;
+        "my-payment-gateway": HTMLMyPaymentGatewayElement;
+        "my-pie-chart": HTMLMyPieChartElement;
+        "my-progress-bar": HTMLMyProgressBarElement;
+        "my-progress-ring": HTMLMyProgressRingElement;
+        "my-rich-text-editor": HTMLMyRichTextEditorElement;
+        "search-world": HTMLSearchWorldElement;
+        "test-button": HTMLTestButtonElement;
+        "test-counter": HTMLTestCounterElement;
     }
 }
 declare namespace LocalJSX {
+    interface MyCard {
+        "userName"?: string;
+    }
     interface MyComponent {
         /**
           * The first name
@@ -47,15 +272,150 @@ declare namespace LocalJSX {
          */
         "middle"?: string;
     }
+    interface MyPaymentGateway {
+    }
+    interface MyPieChart {
+        "data"?: string;
+        "height"?: number;
+        "width"?: number;
+    }
+    interface MyProgressBar {
+        "max"?: number;
+        "value"?: number;
+    }
+    interface MyProgressRing {
+        /**
+          * Color steps of the ring
+         */
+        "colors"?: string | Map<number, string>;
+        /**
+          * Font size of the decimal places
+         */
+        "decimalSize"?: number;
+        /**
+          * Hide decimal places
+         */
+        "disableDecimals"?: boolean;
+        /**
+          * Hide digits
+         */
+        "disableDigits"?: boolean;
+        /**
+          * Animation duration in miliseconds
+         */
+        "duration"?: number;
+        /**
+          * Easing animation function name
+         */
+        "easingType"?: EasingType;
+        /**
+          * Unique ID for the event listeners
+         */
+        "eventId"?: string;
+        /**
+          * Font size of the integer
+         */
+        "intSize"?: number;
+        /**
+          * Inverts the color scheme
+         */
+        "invertColors"?: boolean;
+        /**
+          * Color value to be emitted
+         */
+        "onPrcColor"?: (event: MyProgressRingCustomEvent<ColorChangeEventPayload>) => void;
+        /**
+          * OnComplete event of the animation
+         */
+        "onPrcComplete"?: (event: MyProgressRingCustomEvent<EventPayload>) => void;
+        /**
+          * Animation progress value to be emitted (from 0 to 1)
+         */
+        "onPrcProgress"?: (event: MyProgressRingCustomEvent<ProgressEventPayload>) => void;
+        /**
+          * OnRestart event of the animation
+         */
+        "onPrcRestart"?: (event: MyProgressRingCustomEvent<EventPayload>) => void;
+        /**
+          * OnResume event of the animation
+         */
+        "onPrcResume"?: (event: MyProgressRingCustomEvent<EventPayload>) => void;
+        /**
+          * OnStart event of the animation
+         */
+        "onPrcStart"?: (event: MyProgressRingCustomEvent<EventPayload>) => void;
+        /**
+          * OnStop event of the animation
+         */
+        "onPrcStop"?: (event: MyProgressRingCustomEvent<EventPayload>) => void;
+        /**
+          * Percentage value (mandatory)
+         */
+        "percentage"?: number;
+        /**
+          * Radius of the ring
+         */
+        "radius"?: number;
+        /**
+          * Addes rounded linecap to the ring
+         */
+        "roundLinecap"?: boolean;
+        /**
+          * Thickness of the ring
+         */
+        "strokeWidth"?: number;
+    }
+    interface MyRichTextEditor {
+        "disableQuickbars"?: boolean;
+        "disabled"?: boolean;
+        "initialValue"?: string;
+        "onContentChanged"?: (event: MyRichTextEditorCustomEvent<any>) => void;
+        "onEditorBlur"?: (event: MyRichTextEditorCustomEvent<void>) => void;
+        "onEditorFocus"?: (event: MyRichTextEditorCustomEvent<void>) => void;
+        "onValueChange"?: (event: MyRichTextEditorCustomEvent<string>) => void;
+        /**
+          * Optional placeholder text displayed when the form field is empty.
+         */
+        "placeholder"?: string;
+    }
+    interface SearchWorld {
+        "onSearchWorldNameSelected"?: (event: SearchWorldCustomEvent<string>) => void;
+        "searchText"?: string;
+    }
+    interface TestButton {
+        "buttonId"?: string;
+        "color"?: 'red' | 'green';
+        "onButtonClicked"?: (event: TestButtonCustomEvent<any>) => void;
+    }
+    interface TestCounter {
+    }
     interface IntrinsicElements {
+        "my-card": MyCard;
         "my-component": MyComponent;
+        "my-payment-gateway": MyPaymentGateway;
+        "my-pie-chart": MyPieChart;
+        "my-progress-bar": MyProgressBar;
+        "my-progress-ring": MyProgressRing;
+        "my-rich-text-editor": MyRichTextEditor;
+        "search-world": SearchWorld;
+        "test-button": TestButton;
+        "test-counter": TestCounter;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "my-card": LocalJSX.MyCard & JSXBase.HTMLAttributes<HTMLMyCardElement>;
             "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+            "my-payment-gateway": LocalJSX.MyPaymentGateway & JSXBase.HTMLAttributes<HTMLMyPaymentGatewayElement>;
+            "my-pie-chart": LocalJSX.MyPieChart & JSXBase.HTMLAttributes<HTMLMyPieChartElement>;
+            "my-progress-bar": LocalJSX.MyProgressBar & JSXBase.HTMLAttributes<HTMLMyProgressBarElement>;
+            "my-progress-ring": LocalJSX.MyProgressRing & JSXBase.HTMLAttributes<HTMLMyProgressRingElement>;
+            "my-rich-text-editor": LocalJSX.MyRichTextEditor & JSXBase.HTMLAttributes<HTMLMyRichTextEditorElement>;
+            "search-world": LocalJSX.SearchWorld & JSXBase.HTMLAttributes<HTMLSearchWorldElement>;
+            "test-button": LocalJSX.TestButton & JSXBase.HTMLAttributes<HTMLTestButtonElement>;
+            "test-counter": LocalJSX.TestCounter & JSXBase.HTMLAttributes<HTMLTestCounterElement>;
         }
     }
 }
