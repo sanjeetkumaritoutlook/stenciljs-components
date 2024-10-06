@@ -3,6 +3,22 @@
 # To start using components from this Library
 for example in Angular: 
 npm i stenciljs-components
+then in main.ts:
+import { defineCustomElements } from 'stenciljs-components/loader';
+// Initialize the custom elements
+defineCustomElements(window);
+
+Make sure you have in app.module.ts
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+
+
+then in app.component.html  ,
+they can be added as simple tag with any attribute as property in dash-case
+such as:
+<my-card user-name="CodingLocker"></my-card>
+<my-pie-chart  data='[{"tag":"height","value":180},{"tag":"weight","value":75},{"tag":"age","value":30},{"tag":"score","value":95},{"tag":"yearsExperience","value":5}]'></my-pie-chart>
+
 
 
 This component Library has currently 10 components:
