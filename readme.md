@@ -5,20 +5,23 @@ for example in Angular:
 npm i stenciljs-components
 then in main.ts:
 import { defineCustomElements } from 'stenciljs-components/loader';
+```tsx
 // Initialize the custom elements
 defineCustomElements(window);
-
+```
 Make sure you have in app.module.ts
+```tsx
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-
+```
 
 then in app.component.html  ,
 they can be added as simple tag with any attribute as property in dash-case
 such as:
+```html
 <my-card user-name="CodingLocker"></my-card>
 <my-pie-chart  data='[{"tag":"height","value":180},{"tag":"weight","value":75},{"tag":"age","value":30},{"tag":"score","value":95},{"tag":"yearsExperience","value":5}]'></my-pie-chart>
-
+```
 
 
 This component Library has currently 10 components:
@@ -29,7 +32,7 @@ This component Library has currently 10 components:
 5. search-world (Props:search-text)
 6. test-button (Props:button-id)
 7. test-counter
-8. my-pie-chart  (Props: data[in json format])  - this is using d3.js under the hood
+8. my-pie-chart  (Props: data[JSON format where each entry contains only tag and value (in numbers) as keys])  - this is using d3.js under the hood
 9. my-payment-gateway - this is using StripeJS payment gateway under the hood
 10. my-component (Props:first,middle,last)- default StencilJS Component
 
