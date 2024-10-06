@@ -8,7 +8,7 @@ https://stenciljs.com/docs/publishing
 # Lazy Loading
 If you prefer to have your components automatically loaded when used in your application, we recommend enabling the dist output target. The bundle gives you a small entry file that registers all your components and defers loading the full component logic until it is rendered in your application. It doesn't matter if the actual application is written in HTML or created with vanilla JavaScript, jQuery, React, etc.
 
-This component Library has currently 6 components:
+This component Library has currently 10 components:
 1. my-progress-bar (Props:value,max)
 2. my-rich-text-editor (Props:initial-value,placeholder,disabled,disableQuickbars)
 3. my-progress-ring (Props: percentage, round-linecap, disable-digits,event-id)
