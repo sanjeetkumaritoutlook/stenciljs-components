@@ -7,8 +7,10 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { EasingType } from "easing-animation-frames";
 import { ColorChangeEventPayload, EventPayload, ProgressEventPayload } from "./components/my-progress-ring/my-progress-ring";
+import { AdvancedType, SlideValue } from "./components/slider-component/slider-component";
 export { EasingType } from "easing-animation-frames";
 export { ColorChangeEventPayload, EventPayload, ProgressEventPayload } from "./components/my-progress-ring/my-progress-ring";
+export { AdvancedType, SlideValue } from "./components/slider-component/slider-component";
 export namespace Components {
     interface MyCard {
         "userName": string;
@@ -110,6 +112,12 @@ export namespace Components {
     interface SearchWorld {
         "searchText": string;
     }
+    interface SliderComponent {
+        "advanced": AdvancedType;
+        "max": number;
+        "min": number;
+        "value"?: string | null;
+    }
     interface StopWatch {
         "hours": string;
         "milliseconds": string;
@@ -144,6 +152,10 @@ export interface NiceAlertCustomEvent<T> extends CustomEvent<T> {
 export interface SearchWorldCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLSearchWorldElement;
+}
+export interface SliderComponentCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLSliderComponentElement;
 }
 export interface TestButtonCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -274,6 +286,23 @@ declare global {
         prototype: HTMLSearchWorldElement;
         new (): HTMLSearchWorldElement;
     };
+    interface HTMLSliderComponentElementEventMap {
+        "slideChanged": SlideValue;
+    }
+    interface HTMLSliderComponentElement extends Components.SliderComponent, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLSliderComponentElementEventMap>(type: K, listener: (this: HTMLSliderComponentElement, ev: SliderComponentCustomEvent<HTMLSliderComponentElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLSliderComponentElementEventMap>(type: K, listener: (this: HTMLSliderComponentElement, ev: SliderComponentCustomEvent<HTMLSliderComponentElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLSliderComponentElement: {
+        prototype: HTMLSliderComponentElement;
+        new (): HTMLSliderComponentElement;
+    };
     interface HTMLStopWatchElement extends Components.StopWatch, HTMLStencilElement {
     }
     var HTMLStopWatchElement: {
@@ -320,6 +349,7 @@ declare global {
         "my-rich-text-editor": HTMLMyRichTextEditorElement;
         "nice-alert": HTMLNiceAlertElement;
         "search-world": HTMLSearchWorldElement;
+        "slider-component": HTMLSliderComponentElement;
         "stop-watch": HTMLStopWatchElement;
         "stop-watch-box": HTMLStopWatchBoxElement;
         "test-button": HTMLTestButtonElement;
@@ -462,6 +492,13 @@ declare namespace LocalJSX {
         "onSearchWorldNameSelected"?: (event: SearchWorldCustomEvent<string>) => void;
         "searchText"?: string;
     }
+    interface SliderComponent {
+        "advanced"?: AdvancedType;
+        "max"?: number;
+        "min"?: number;
+        "onSlideChanged"?: (event: SliderComponentCustomEvent<SlideValue>) => void;
+        "value"?: string | null;
+    }
     interface StopWatch {
         "hours"?: string;
         "milliseconds"?: string;
@@ -488,6 +525,7 @@ declare namespace LocalJSX {
         "my-rich-text-editor": MyRichTextEditor;
         "nice-alert": NiceAlert;
         "search-world": SearchWorld;
+        "slider-component": SliderComponent;
         "stop-watch": StopWatch;
         "stop-watch-box": StopWatchBox;
         "test-button": TestButton;
@@ -508,6 +546,7 @@ declare module "@stencil/core" {
             "my-rich-text-editor": LocalJSX.MyRichTextEditor & JSXBase.HTMLAttributes<HTMLMyRichTextEditorElement>;
             "nice-alert": LocalJSX.NiceAlert & JSXBase.HTMLAttributes<HTMLNiceAlertElement>;
             "search-world": LocalJSX.SearchWorld & JSXBase.HTMLAttributes<HTMLSearchWorldElement>;
+            "slider-component": LocalJSX.SliderComponent & JSXBase.HTMLAttributes<HTMLSliderComponentElement>;
             "stop-watch": LocalJSX.StopWatch & JSXBase.HTMLAttributes<HTMLStopWatchElement>;
             "stop-watch-box": LocalJSX.StopWatchBox & JSXBase.HTMLAttributes<HTMLStopWatchBoxElement>;
             "test-button": LocalJSX.TestButton & JSXBase.HTMLAttributes<HTMLTestButtonElement>;
