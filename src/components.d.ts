@@ -27,6 +27,9 @@ export namespace Components {
          */
         "middle": string;
     }
+    interface MyName {
+        "name": string;
+    }
     interface MyPaymentGateway {
     }
     interface MyPieChart {
@@ -101,8 +104,19 @@ export namespace Components {
          */
         "placeholder": string;
     }
+    interface NiceAlert {
+        "message": string;
+    }
     interface SearchWorld {
         "searchText": string;
+    }
+    interface StopWatch {
+        "hours": string;
+        "milliseconds": string;
+        "minutes": string;
+        "seconds": string;
+    }
+    interface StopWatchBox {
     }
     interface TestButton {
         "buttonId": string;
@@ -111,6 +125,10 @@ export namespace Components {
     interface TestCounter {
     }
 }
+export interface MyNameCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLMyNameElement;
+}
 export interface MyProgressRingCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLMyProgressRingElement;
@@ -118,6 +136,10 @@ export interface MyProgressRingCustomEvent<T> extends CustomEvent<T> {
 export interface MyRichTextEditorCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLMyRichTextEditorElement;
+}
+export interface NiceAlertCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLNiceAlertElement;
 }
 export interface SearchWorldCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -139,6 +161,23 @@ declare global {
     var HTMLMyComponentElement: {
         prototype: HTMLMyComponentElement;
         new (): HTMLMyComponentElement;
+    };
+    interface HTMLMyNameElementEventMap {
+        "myEvent": any;
+    }
+    interface HTMLMyNameElement extends Components.MyName, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLMyNameElementEventMap>(type: K, listener: (this: HTMLMyNameElement, ev: MyNameCustomEvent<HTMLMyNameElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLMyNameElementEventMap>(type: K, listener: (this: HTMLMyNameElement, ev: MyNameCustomEvent<HTMLMyNameElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLMyNameElement: {
+        prototype: HTMLMyNameElement;
+        new (): HTMLMyNameElement;
     };
     interface HTMLMyPaymentGatewayElement extends Components.MyPaymentGateway, HTMLStencilElement {
     }
@@ -201,6 +240,23 @@ declare global {
         prototype: HTMLMyRichTextEditorElement;
         new (): HTMLMyRichTextEditorElement;
     };
+    interface HTMLNiceAlertElementEventMap {
+        "alertDismissed": any;
+    }
+    interface HTMLNiceAlertElement extends Components.NiceAlert, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLNiceAlertElementEventMap>(type: K, listener: (this: HTMLNiceAlertElement, ev: NiceAlertCustomEvent<HTMLNiceAlertElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLNiceAlertElementEventMap>(type: K, listener: (this: HTMLNiceAlertElement, ev: NiceAlertCustomEvent<HTMLNiceAlertElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLNiceAlertElement: {
+        prototype: HTMLNiceAlertElement;
+        new (): HTMLNiceAlertElement;
+    };
     interface HTMLSearchWorldElementEventMap {
         "searchWorldNameSelected": string;
     }
@@ -217,6 +273,18 @@ declare global {
     var HTMLSearchWorldElement: {
         prototype: HTMLSearchWorldElement;
         new (): HTMLSearchWorldElement;
+    };
+    interface HTMLStopWatchElement extends Components.StopWatch, HTMLStencilElement {
+    }
+    var HTMLStopWatchElement: {
+        prototype: HTMLStopWatchElement;
+        new (): HTMLStopWatchElement;
+    };
+    interface HTMLStopWatchBoxElement extends Components.StopWatchBox, HTMLStencilElement {
+    }
+    var HTMLStopWatchBoxElement: {
+        prototype: HTMLStopWatchBoxElement;
+        new (): HTMLStopWatchBoxElement;
     };
     interface HTMLTestButtonElementEventMap {
         "buttonClicked": any;
@@ -244,12 +312,16 @@ declare global {
     interface HTMLElementTagNameMap {
         "my-card": HTMLMyCardElement;
         "my-component": HTMLMyComponentElement;
+        "my-name": HTMLMyNameElement;
         "my-payment-gateway": HTMLMyPaymentGatewayElement;
         "my-pie-chart": HTMLMyPieChartElement;
         "my-progress-bar": HTMLMyProgressBarElement;
         "my-progress-ring": HTMLMyProgressRingElement;
         "my-rich-text-editor": HTMLMyRichTextEditorElement;
+        "nice-alert": HTMLNiceAlertElement;
         "search-world": HTMLSearchWorldElement;
+        "stop-watch": HTMLStopWatchElement;
+        "stop-watch-box": HTMLStopWatchBoxElement;
         "test-button": HTMLTestButtonElement;
         "test-counter": HTMLTestCounterElement;
     }
@@ -271,6 +343,10 @@ declare namespace LocalJSX {
           * The middle name
          */
         "middle"?: string;
+    }
+    interface MyName {
+        "name"?: string;
+        "onMyEvent"?: (event: MyNameCustomEvent<any>) => void;
     }
     interface MyPaymentGateway {
     }
@@ -378,9 +454,21 @@ declare namespace LocalJSX {
          */
         "placeholder"?: string;
     }
+    interface NiceAlert {
+        "message"?: string;
+        "onAlertDismissed"?: (event: NiceAlertCustomEvent<any>) => void;
+    }
     interface SearchWorld {
         "onSearchWorldNameSelected"?: (event: SearchWorldCustomEvent<string>) => void;
         "searchText"?: string;
+    }
+    interface StopWatch {
+        "hours"?: string;
+        "milliseconds"?: string;
+        "minutes"?: string;
+        "seconds"?: string;
+    }
+    interface StopWatchBox {
     }
     interface TestButton {
         "buttonId"?: string;
@@ -392,12 +480,16 @@ declare namespace LocalJSX {
     interface IntrinsicElements {
         "my-card": MyCard;
         "my-component": MyComponent;
+        "my-name": MyName;
         "my-payment-gateway": MyPaymentGateway;
         "my-pie-chart": MyPieChart;
         "my-progress-bar": MyProgressBar;
         "my-progress-ring": MyProgressRing;
         "my-rich-text-editor": MyRichTextEditor;
+        "nice-alert": NiceAlert;
         "search-world": SearchWorld;
+        "stop-watch": StopWatch;
+        "stop-watch-box": StopWatchBox;
         "test-button": TestButton;
         "test-counter": TestCounter;
     }
@@ -408,12 +500,16 @@ declare module "@stencil/core" {
         interface IntrinsicElements {
             "my-card": LocalJSX.MyCard & JSXBase.HTMLAttributes<HTMLMyCardElement>;
             "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+            "my-name": LocalJSX.MyName & JSXBase.HTMLAttributes<HTMLMyNameElement>;
             "my-payment-gateway": LocalJSX.MyPaymentGateway & JSXBase.HTMLAttributes<HTMLMyPaymentGatewayElement>;
             "my-pie-chart": LocalJSX.MyPieChart & JSXBase.HTMLAttributes<HTMLMyPieChartElement>;
             "my-progress-bar": LocalJSX.MyProgressBar & JSXBase.HTMLAttributes<HTMLMyProgressBarElement>;
             "my-progress-ring": LocalJSX.MyProgressRing & JSXBase.HTMLAttributes<HTMLMyProgressRingElement>;
             "my-rich-text-editor": LocalJSX.MyRichTextEditor & JSXBase.HTMLAttributes<HTMLMyRichTextEditorElement>;
+            "nice-alert": LocalJSX.NiceAlert & JSXBase.HTMLAttributes<HTMLNiceAlertElement>;
             "search-world": LocalJSX.SearchWorld & JSXBase.HTMLAttributes<HTMLSearchWorldElement>;
+            "stop-watch": LocalJSX.StopWatch & JSXBase.HTMLAttributes<HTMLStopWatchElement>;
+            "stop-watch-box": LocalJSX.StopWatchBox & JSXBase.HTMLAttributes<HTMLStopWatchBoxElement>;
             "test-button": LocalJSX.TestButton & JSXBase.HTMLAttributes<HTMLTestButtonElement>;
             "test-counter": LocalJSX.TestCounter & JSXBase.HTMLAttributes<HTMLTestCounterElement>;
         }
