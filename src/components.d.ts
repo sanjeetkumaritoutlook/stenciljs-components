@@ -5,13 +5,33 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { apiData } from "./components/my-button/types";
 import { EasingType } from "easing-animation-frames";
 import { ColorChangeEventPayload, EventPayload, ProgressEventPayload } from "./components/my-progress-ring/my-progress-ring";
+import { RouterHistory } from "@stencil/router";
 import { AdvancedType, SlideValue } from "./components/slider-component/slider-component";
+export { apiData } from "./components/my-button/types";
 export { EasingType } from "easing-animation-frames";
 export { ColorChangeEventPayload, EventPayload, ProgressEventPayload } from "./components/my-progress-ring/my-progress-ring";
+export { RouterHistory } from "@stencil/router";
 export { AdvancedType, SlideValue } from "./components/slider-component/slider-component";
 export namespace Components {
+    interface ComboBox {
+        "allowInput": boolean;
+        "label": string;
+    }
+    interface ComplexIonicForm {
+    }
+    interface CustomForm {
+    }
+    interface CustomTextInput {
+    }
+    interface EmbedComponent {
+        "color": string;
+    }
+    interface MyButton {
+        "text": string;
+    }
     interface MyCard {
         "userName": string;
     }
@@ -109,8 +129,15 @@ export namespace Components {
     interface NiceAlert {
         "message": string;
     }
+    interface ParentComponent {
+    }
     interface SearchWorld {
         "searchText": string;
+    }
+    interface SimpleForm {
+        "firstName": string;
+        "history": RouterHistory;
+        "lastName": string;
     }
     interface SliderComponent {
         "advanced": AdvancedType;
@@ -132,6 +159,22 @@ export namespace Components {
     }
     interface TestCounter {
     }
+}
+export interface ComboBoxCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLComboBoxElement;
+}
+export interface CustomTextInputCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLCustomTextInputElement;
+}
+export interface EmbedComponentCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLEmbedComponentElement;
+}
+export interface MyButtonCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLMyButtonElement;
 }
 export interface MyNameCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -162,6 +205,86 @@ export interface TestButtonCustomEvent<T> extends CustomEvent<T> {
     target: HTMLTestButtonElement;
 }
 declare global {
+    interface HTMLComboBoxElementEventMap {
+        "comboBoxInput": string;
+    }
+    interface HTMLComboBoxElement extends Components.ComboBox, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLComboBoxElementEventMap>(type: K, listener: (this: HTMLComboBoxElement, ev: ComboBoxCustomEvent<HTMLComboBoxElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLComboBoxElementEventMap>(type: K, listener: (this: HTMLComboBoxElement, ev: ComboBoxCustomEvent<HTMLComboBoxElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLComboBoxElement: {
+        prototype: HTMLComboBoxElement;
+        new (): HTMLComboBoxElement;
+    };
+    interface HTMLComplexIonicFormElement extends Components.ComplexIonicForm, HTMLStencilElement {
+    }
+    var HTMLComplexIonicFormElement: {
+        prototype: HTMLComplexIonicFormElement;
+        new (): HTMLComplexIonicFormElement;
+    };
+    interface HTMLCustomFormElement extends Components.CustomForm, HTMLStencilElement {
+    }
+    var HTMLCustomFormElement: {
+        prototype: HTMLCustomFormElement;
+        new (): HTMLCustomFormElement;
+    };
+    interface HTMLCustomTextInputElementEventMap {
+        "customInput": string;
+    }
+    interface HTMLCustomTextInputElement extends Components.CustomTextInput, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLCustomTextInputElementEventMap>(type: K, listener: (this: HTMLCustomTextInputElement, ev: CustomTextInputCustomEvent<HTMLCustomTextInputElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLCustomTextInputElementEventMap>(type: K, listener: (this: HTMLCustomTextInputElement, ev: CustomTextInputCustomEvent<HTMLCustomTextInputElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLCustomTextInputElement: {
+        prototype: HTMLCustomTextInputElement;
+        new (): HTMLCustomTextInputElement;
+    };
+    interface HTMLEmbedComponentElementEventMap {
+        "write": string;
+    }
+    interface HTMLEmbedComponentElement extends Components.EmbedComponent, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLEmbedComponentElementEventMap>(type: K, listener: (this: HTMLEmbedComponentElement, ev: EmbedComponentCustomEvent<HTMLEmbedComponentElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLEmbedComponentElementEventMap>(type: K, listener: (this: HTMLEmbedComponentElement, ev: EmbedComponentCustomEvent<HTMLEmbedComponentElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLEmbedComponentElement: {
+        prototype: HTMLEmbedComponentElement;
+        new (): HTMLEmbedComponentElement;
+    };
+    interface HTMLMyButtonElementEventMap {
+        "myEvent": apiData;
+    }
+    interface HTMLMyButtonElement extends Components.MyButton, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLMyButtonElementEventMap>(type: K, listener: (this: HTMLMyButtonElement, ev: MyButtonCustomEvent<HTMLMyButtonElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLMyButtonElementEventMap>(type: K, listener: (this: HTMLMyButtonElement, ev: MyButtonCustomEvent<HTMLMyButtonElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLMyButtonElement: {
+        prototype: HTMLMyButtonElement;
+        new (): HTMLMyButtonElement;
+    };
     interface HTMLMyCardElement extends Components.MyCard, HTMLStencilElement {
     }
     var HTMLMyCardElement: {
@@ -269,6 +392,12 @@ declare global {
         prototype: HTMLNiceAlertElement;
         new (): HTMLNiceAlertElement;
     };
+    interface HTMLParentComponentElement extends Components.ParentComponent, HTMLStencilElement {
+    }
+    var HTMLParentComponentElement: {
+        prototype: HTMLParentComponentElement;
+        new (): HTMLParentComponentElement;
+    };
     interface HTMLSearchWorldElementEventMap {
         "searchWorldNameSelected": string;
     }
@@ -285,6 +414,12 @@ declare global {
     var HTMLSearchWorldElement: {
         prototype: HTMLSearchWorldElement;
         new (): HTMLSearchWorldElement;
+    };
+    interface HTMLSimpleFormElement extends Components.SimpleForm, HTMLStencilElement {
+    }
+    var HTMLSimpleFormElement: {
+        prototype: HTMLSimpleFormElement;
+        new (): HTMLSimpleFormElement;
     };
     interface HTMLSliderComponentElementEventMap {
         "slideChanged": SlideValue;
@@ -339,6 +474,12 @@ declare global {
         new (): HTMLTestCounterElement;
     };
     interface HTMLElementTagNameMap {
+        "combo-box": HTMLComboBoxElement;
+        "complex-ionic-form": HTMLComplexIonicFormElement;
+        "custom-form": HTMLCustomFormElement;
+        "custom-text-input": HTMLCustomTextInputElement;
+        "embed-component": HTMLEmbedComponentElement;
+        "my-button": HTMLMyButtonElement;
         "my-card": HTMLMyCardElement;
         "my-component": HTMLMyComponentElement;
         "my-name": HTMLMyNameElement;
@@ -348,7 +489,9 @@ declare global {
         "my-progress-ring": HTMLMyProgressRingElement;
         "my-rich-text-editor": HTMLMyRichTextEditorElement;
         "nice-alert": HTMLNiceAlertElement;
+        "parent-component": HTMLParentComponentElement;
         "search-world": HTMLSearchWorldElement;
+        "simple-form": HTMLSimpleFormElement;
         "slider-component": HTMLSliderComponentElement;
         "stop-watch": HTMLStopWatchElement;
         "stop-watch-box": HTMLStopWatchBoxElement;
@@ -357,6 +500,26 @@ declare global {
     }
 }
 declare namespace LocalJSX {
+    interface ComboBox {
+        "allowInput"?: boolean;
+        "label"?: string;
+        "onComboBoxInput"?: (event: ComboBoxCustomEvent<string>) => void;
+    }
+    interface ComplexIonicForm {
+    }
+    interface CustomForm {
+    }
+    interface CustomTextInput {
+        "onCustomInput"?: (event: CustomTextInputCustomEvent<string>) => void;
+    }
+    interface EmbedComponent {
+        "color"?: string;
+        "onWrite"?: (event: EmbedComponentCustomEvent<string>) => void;
+    }
+    interface MyButton {
+        "onMyEvent"?: (event: MyButtonCustomEvent<apiData>) => void;
+        "text"?: string;
+    }
     interface MyCard {
         "userName"?: string;
     }
@@ -488,9 +651,16 @@ declare namespace LocalJSX {
         "message"?: string;
         "onAlertDismissed"?: (event: NiceAlertCustomEvent<any>) => void;
     }
+    interface ParentComponent {
+    }
     interface SearchWorld {
         "onSearchWorldNameSelected"?: (event: SearchWorldCustomEvent<string>) => void;
         "searchText"?: string;
+    }
+    interface SimpleForm {
+        "firstName"?: string;
+        "history"?: RouterHistory;
+        "lastName"?: string;
     }
     interface SliderComponent {
         "advanced"?: AdvancedType;
@@ -515,6 +685,12 @@ declare namespace LocalJSX {
     interface TestCounter {
     }
     interface IntrinsicElements {
+        "combo-box": ComboBox;
+        "complex-ionic-form": ComplexIonicForm;
+        "custom-form": CustomForm;
+        "custom-text-input": CustomTextInput;
+        "embed-component": EmbedComponent;
+        "my-button": MyButton;
         "my-card": MyCard;
         "my-component": MyComponent;
         "my-name": MyName;
@@ -524,7 +700,9 @@ declare namespace LocalJSX {
         "my-progress-ring": MyProgressRing;
         "my-rich-text-editor": MyRichTextEditor;
         "nice-alert": NiceAlert;
+        "parent-component": ParentComponent;
         "search-world": SearchWorld;
+        "simple-form": SimpleForm;
         "slider-component": SliderComponent;
         "stop-watch": StopWatch;
         "stop-watch-box": StopWatchBox;
@@ -536,6 +714,12 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "combo-box": LocalJSX.ComboBox & JSXBase.HTMLAttributes<HTMLComboBoxElement>;
+            "complex-ionic-form": LocalJSX.ComplexIonicForm & JSXBase.HTMLAttributes<HTMLComplexIonicFormElement>;
+            "custom-form": LocalJSX.CustomForm & JSXBase.HTMLAttributes<HTMLCustomFormElement>;
+            "custom-text-input": LocalJSX.CustomTextInput & JSXBase.HTMLAttributes<HTMLCustomTextInputElement>;
+            "embed-component": LocalJSX.EmbedComponent & JSXBase.HTMLAttributes<HTMLEmbedComponentElement>;
+            "my-button": LocalJSX.MyButton & JSXBase.HTMLAttributes<HTMLMyButtonElement>;
             "my-card": LocalJSX.MyCard & JSXBase.HTMLAttributes<HTMLMyCardElement>;
             "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
             "my-name": LocalJSX.MyName & JSXBase.HTMLAttributes<HTMLMyNameElement>;
@@ -545,7 +729,9 @@ declare module "@stencil/core" {
             "my-progress-ring": LocalJSX.MyProgressRing & JSXBase.HTMLAttributes<HTMLMyProgressRingElement>;
             "my-rich-text-editor": LocalJSX.MyRichTextEditor & JSXBase.HTMLAttributes<HTMLMyRichTextEditorElement>;
             "nice-alert": LocalJSX.NiceAlert & JSXBase.HTMLAttributes<HTMLNiceAlertElement>;
+            "parent-component": LocalJSX.ParentComponent & JSXBase.HTMLAttributes<HTMLParentComponentElement>;
             "search-world": LocalJSX.SearchWorld & JSXBase.HTMLAttributes<HTMLSearchWorldElement>;
+            "simple-form": LocalJSX.SimpleForm & JSXBase.HTMLAttributes<HTMLSimpleFormElement>;
             "slider-component": LocalJSX.SliderComponent & JSXBase.HTMLAttributes<HTMLSliderComponentElement>;
             "stop-watch": LocalJSX.StopWatch & JSXBase.HTMLAttributes<HTMLStopWatchElement>;
             "stop-watch-box": LocalJSX.StopWatchBox & JSXBase.HTMLAttributes<HTMLStopWatchBoxElement>;

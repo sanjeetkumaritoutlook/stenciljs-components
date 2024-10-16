@@ -27,6 +27,9 @@
        }
        console.log("completed")
      };
+     const btnClick =(event)=>{
+      console.log(event);
+     }
  
      // Register eventLiteners
      document.addEventListener("prcComplete", completeEventCallback);
@@ -42,5 +45,10 @@
    <!--using the stop watch box componnet-->
    <stop-watch-box></stop-watch-box>
    <slider-component min="0" max="1000"></slider-component>
+   <my-button text="Hello" onMyEvent= btnClick(event)></my-button>
+   <parent-component></parent-component>
+   <simple-form first-name="Sanjeet" last-name="Kumar"></simple-form>
+   <complex-ionic-form></complex-ionic-form>
+   <custom-form></custom-form>
   </body>
 </html>

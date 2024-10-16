@@ -1,0 +1,9 @@
+:host {
+  display: block;
+}
+.app-profile {
+  padding: 10px;
+}
+ion-content {
+  --overflow: auto; /* Allow scrolling */
+}

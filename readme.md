@@ -31,6 +31,11 @@ such as:
  <search-world search-text="bmw"> </search-world> 
  <my-payment-gateway></my-payment-gateway>
  <my-component first="Sanjeet" last="Kumar"></my-component>
+ <my-button text="Hello"></my-button>
+ <parent-component></parent-component>"
+ <simple-form first-name="Sanjeet" last-name="Kumar"></simple-form>
+ <complex-ionic-form></complex-ionic-form>
+ <custom-form></custom-form>
 ```
 
 
@@ -45,6 +50,14 @@ This component Library has currently 10 components:
 8. my-pie-chart  (Props: data[JSON format where each entry contains only tag and value (in numbers) as keys])  - this is using d3.js under the hood
 9. my-payment-gateway - this is using StripeJS payment gateway under the hood
 10. my-component (Props:first,middle,last)- default StencilJS Component
+11. my-button (Props:text)
+12. parent-component (uses embed-component inside it)
+13. embed-component
+14. simple-form (Props: first-name, last-name; form built using ionic components)
+15. complex-ionic-form  (form built using ionic components)
+16. custom-form (uses combo-box and custom-text-input)
+17. combo-box
+18. custom-text-input (uses AttachInternals from StencilJS)
 
 
 # Component Library or Design system
