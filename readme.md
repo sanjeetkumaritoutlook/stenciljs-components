@@ -1,23 +1,23 @@
 [![Built With Stencil](https://img.shields.io/badge/-Built%20With%20Stencil-16161d.svg?logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjIuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA1MTIgNTEyOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI%2BCjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI%2BCgkuc3Qwe2ZpbGw6I0ZGRkZGRjt9Cjwvc3R5bGU%2BCjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik00MjQuNywzNzMuOWMwLDM3LjYtNTUuMSw2OC42LTkyLjcsNjguNkgxODAuNGMtMzcuOSwwLTkyLjctMzAuNy05Mi43LTY4LjZ2LTMuNmgzMzYuOVYzNzMuOXoiLz4KPHBhdGggY2xhc3M9InN0MCIgZD0iTTQyNC43LDI5Mi4xSDE4MC40Yy0zNy42LDAtOTIuNy0zMS05Mi43LTY4LjZ2LTMuNkgzMzJjMzcuNiwwLDkyLjcsMzEsOTIuNyw2OC42VjI5Mi4xeiIvPgo8cGF0aCBjbGFzcz0ic3QwIiBkPSJNNDI0LjcsMTQxLjdIODcuN3YtMy42YzAtMzcuNiw1NC44LTY4LjYsOTIuNy02OC42SDMzMmMzNy45LDAsOTIuNywzMC43LDkyLjcsNjguNlYxNDEuN3oiLz4KPC9zdmc%2BCg%3D%3D&colorA=16161d&style=flat-square)](https://stenciljs.com)
 
 # To start using components from this Library
-for example in Angular: 
+for example in Angular/React: 
 ```bash
 npm i stenciljs-components
 ```
-then in main.ts:
+then in main.ts (Angular)/ index.tsx (React):
 ```tsx
 import { defineCustomElements } from 'stenciljs-components/loader';
 // Initialize the custom elements
 defineCustomElements(window);
 ```
-Make sure you have in app.module.ts
+Make sure you have in app.module.ts in Angular (not needed in React)
 ```tsx
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 ```
 
-then in app.component.html  ,
+then in app.component.html (Angular)/ App.tsx(React) ,
 they can be added as simple tag with any attribute as property in dash-case
 such as:
 ```html
@@ -36,6 +36,7 @@ such as:
  <simple-form first-name="Sanjeet" last-name="Kumar"></simple-form>
  <complex-ionic-form></complex-ionic-form>
  <custom-form></custom-form>
+ <combo-box allow-input="true"></combo-box>
 ```
 
 
@@ -56,7 +57,7 @@ This component Library has currently 10 components:
 14. simple-form (Props: first-name, last-name; form built using ionic components)
 15. complex-ionic-form  (form built using ionic components)
 16. custom-form (uses combo-box and custom-text-input)
-17. combo-box
+17. combo-box (Props:allow-input, label) -> takes time in React to show arbitrary input in dropdown, foucus out of the field after typing 
 18. custom-text-input (uses AttachInternals from StencilJS)
 
 
@@ -64,6 +65,14 @@ This component Library has currently 10 components:
 Ionic (https://ionicframework.com/) .
 @ionic/core (https://www.npmjs.com/package/@ionic/core ) comes with over 100 components
 https://stenciljs.com/docs/publishing
+
+# Create new React App in Typescript
+npx create-react-app my-app --template typescript
+
+https://builtin.com/software-engineering-perspectives/create-react-app-typescript
+
+# create React component in typescript
+https://react.dev/learn/typescript
 
 # Lazy Loading
 If you prefer to have your components automatically loaded when used in your application, we recommend enabling the dist output target. The bundle gives you a small entry file that registers all your components and defers loading the full component logic until it is rendered in your application. It doesn't matter if the actual application is written in HTML or created with vanilla JavaScript, jQuery, React, etc.
