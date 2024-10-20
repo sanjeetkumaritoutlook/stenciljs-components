@@ -16,6 +16,11 @@ export { ColorChangeEventPayload, EventPayload, ProgressEventPayload } from "./c
 export { RouterHistory } from "@stencil/router";
 export { AdvancedType, SlideValue } from "./components/slider-component/slider-component";
 export namespace Components {
+    interface AppHome {
+    }
+    interface AppProfile {
+        "name": string;
+    }
     interface ComboBox {
         "allowInput": boolean;
         "label": string;
@@ -28,6 +33,12 @@ export namespace Components {
     }
     interface EmbedComponent {
         "color": string;
+    }
+    interface LazyImg {
+        "alt": string;
+        "isServer": boolean;
+        "src": string;
+        "width": number;
     }
     interface MyButton {
         "text": string;
@@ -48,6 +59,8 @@ export namespace Components {
           * The middle name
          */
         "middle": string;
+    }
+    interface MyDashboard {
     }
     interface MyName {
         "name": string;
@@ -120,6 +133,8 @@ export namespace Components {
     interface MyRichTextEditor {
         "disableQuickbars": boolean;
         "disabled": boolean;
+        "fontFamily": string;
+        "fontSize": string;
         "initialValue": string;
         /**
           * Optional placeholder text displayed when the form field is empty.
@@ -159,6 +174,9 @@ export namespace Components {
     }
     interface TestCounter {
     }
+    interface UsersCards {
+        "columns": string;
+    }
 }
 export interface ComboBoxCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -171,6 +189,10 @@ export interface CustomTextInputCustomEvent<T> extends CustomEvent<T> {
 export interface EmbedComponentCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLEmbedComponentElement;
+}
+export interface LazyImgCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLLazyImgElement;
 }
 export interface MyButtonCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -205,6 +227,18 @@ export interface TestButtonCustomEvent<T> extends CustomEvent<T> {
     target: HTMLTestButtonElement;
 }
 declare global {
+    interface HTMLAppHomeElement extends Components.AppHome, HTMLStencilElement {
+    }
+    var HTMLAppHomeElement: {
+        prototype: HTMLAppHomeElement;
+        new (): HTMLAppHomeElement;
+    };
+    interface HTMLAppProfileElement extends Components.AppProfile, HTMLStencilElement {
+    }
+    var HTMLAppProfileElement: {
+        prototype: HTMLAppProfileElement;
+        new (): HTMLAppProfileElement;
+    };
     interface HTMLComboBoxElementEventMap {
         "comboBoxInput": string;
     }
@@ -268,6 +302,23 @@ declare global {
         prototype: HTMLEmbedComponentElement;
         new (): HTMLEmbedComponentElement;
     };
+    interface HTMLLazyImgElementEventMap {
+        "lazyImgloaded": HTMLImageElement;
+    }
+    interface HTMLLazyImgElement extends Components.LazyImg, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLLazyImgElementEventMap>(type: K, listener: (this: HTMLLazyImgElement, ev: LazyImgCustomEvent<HTMLLazyImgElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLLazyImgElementEventMap>(type: K, listener: (this: HTMLLazyImgElement, ev: LazyImgCustomEvent<HTMLLazyImgElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLLazyImgElement: {
+        prototype: HTMLLazyImgElement;
+        new (): HTMLLazyImgElement;
+    };
     interface HTMLMyButtonElementEventMap {
         "myEvent": apiData;
     }
@@ -296,6 +347,12 @@ declare global {
     var HTMLMyComponentElement: {
         prototype: HTMLMyComponentElement;
         new (): HTMLMyComponentElement;
+    };
+    interface HTMLMyDashboardElement extends Components.MyDashboard, HTMLStencilElement {
+    }
+    var HTMLMyDashboardElement: {
+        prototype: HTMLMyDashboardElement;
+        new (): HTMLMyDashboardElement;
     };
     interface HTMLMyNameElementEventMap {
         "myEvent": any;
@@ -473,15 +530,25 @@ declare global {
         prototype: HTMLTestCounterElement;
         new (): HTMLTestCounterElement;
     };
+    interface HTMLUsersCardsElement extends Components.UsersCards, HTMLStencilElement {
+    }
+    var HTMLUsersCardsElement: {
+        prototype: HTMLUsersCardsElement;
+        new (): HTMLUsersCardsElement;
+    };
     interface HTMLElementTagNameMap {
+        "app-home": HTMLAppHomeElement;
+        "app-profile": HTMLAppProfileElement;
         "combo-box": HTMLComboBoxElement;
         "complex-ionic-form": HTMLComplexIonicFormElement;
         "custom-form": HTMLCustomFormElement;
         "custom-text-input": HTMLCustomTextInputElement;
         "embed-component": HTMLEmbedComponentElement;
+        "lazy-img": HTMLLazyImgElement;
         "my-button": HTMLMyButtonElement;
         "my-card": HTMLMyCardElement;
         "my-component": HTMLMyComponentElement;
+        "my-dashboard": HTMLMyDashboardElement;
         "my-name": HTMLMyNameElement;
         "my-payment-gateway": HTMLMyPaymentGatewayElement;
         "my-pie-chart": HTMLMyPieChartElement;
@@ -497,9 +564,15 @@ declare global {
         "stop-watch-box": HTMLStopWatchBoxElement;
         "test-button": HTMLTestButtonElement;
         "test-counter": HTMLTestCounterElement;
+        "users-cards": HTMLUsersCardsElement;
     }
 }
 declare namespace LocalJSX {
+    interface AppHome {
+    }
+    interface AppProfile {
+        "name"?: string;
+    }
     interface ComboBox {
         "allowInput"?: boolean;
         "label"?: string;
@@ -515,6 +588,13 @@ declare namespace LocalJSX {
     interface EmbedComponent {
         "color"?: string;
         "onWrite"?: (event: EmbedComponentCustomEvent<string>) => void;
+    }
+    interface LazyImg {
+        "alt"?: string;
+        "isServer"?: boolean;
+        "onLazyImgloaded"?: (event: LazyImgCustomEvent<HTMLImageElement>) => void;
+        "src"?: string;
+        "width"?: number;
     }
     interface MyButton {
         "onMyEvent"?: (event: MyButtonCustomEvent<apiData>) => void;
@@ -536,6 +616,8 @@ declare namespace LocalJSX {
           * The middle name
          */
         "middle"?: string;
+    }
+    interface MyDashboard {
     }
     interface MyName {
         "name"?: string;
@@ -637,6 +719,8 @@ declare namespace LocalJSX {
     interface MyRichTextEditor {
         "disableQuickbars"?: boolean;
         "disabled"?: boolean;
+        "fontFamily"?: string;
+        "fontSize"?: string;
         "initialValue"?: string;
         "onContentChanged"?: (event: MyRichTextEditorCustomEvent<any>) => void;
         "onEditorBlur"?: (event: MyRichTextEditorCustomEvent<void>) => void;
@@ -684,15 +768,22 @@ declare namespace LocalJSX {
     }
     interface TestCounter {
     }
+    interface UsersCards {
+        "columns"?: string;
+    }
     interface IntrinsicElements {
+        "app-home": AppHome;
+        "app-profile": AppProfile;
         "combo-box": ComboBox;
         "complex-ionic-form": ComplexIonicForm;
         "custom-form": CustomForm;
         "custom-text-input": CustomTextInput;
         "embed-component": EmbedComponent;
+        "lazy-img": LazyImg;
         "my-button": MyButton;
         "my-card": MyCard;
         "my-component": MyComponent;
+        "my-dashboard": MyDashboard;
         "my-name": MyName;
         "my-payment-gateway": MyPaymentGateway;
         "my-pie-chart": MyPieChart;
@@ -708,20 +799,25 @@ declare namespace LocalJSX {
         "stop-watch-box": StopWatchBox;
         "test-button": TestButton;
         "test-counter": TestCounter;
+        "users-cards": UsersCards;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "app-home": LocalJSX.AppHome & JSXBase.HTMLAttributes<HTMLAppHomeElement>;
+            "app-profile": LocalJSX.AppProfile & JSXBase.HTMLAttributes<HTMLAppProfileElement>;
             "combo-box": LocalJSX.ComboBox & JSXBase.HTMLAttributes<HTMLComboBoxElement>;
             "complex-ionic-form": LocalJSX.ComplexIonicForm & JSXBase.HTMLAttributes<HTMLComplexIonicFormElement>;
             "custom-form": LocalJSX.CustomForm & JSXBase.HTMLAttributes<HTMLCustomFormElement>;
             "custom-text-input": LocalJSX.CustomTextInput & JSXBase.HTMLAttributes<HTMLCustomTextInputElement>;
             "embed-component": LocalJSX.EmbedComponent & JSXBase.HTMLAttributes<HTMLEmbedComponentElement>;
+            "lazy-img": LocalJSX.LazyImg & JSXBase.HTMLAttributes<HTMLLazyImgElement>;
             "my-button": LocalJSX.MyButton & JSXBase.HTMLAttributes<HTMLMyButtonElement>;
             "my-card": LocalJSX.MyCard & JSXBase.HTMLAttributes<HTMLMyCardElement>;
             "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+            "my-dashboard": LocalJSX.MyDashboard & JSXBase.HTMLAttributes<HTMLMyDashboardElement>;
             "my-name": LocalJSX.MyName & JSXBase.HTMLAttributes<HTMLMyNameElement>;
             "my-payment-gateway": LocalJSX.MyPaymentGateway & JSXBase.HTMLAttributes<HTMLMyPaymentGatewayElement>;
             "my-pie-chart": LocalJSX.MyPieChart & JSXBase.HTMLAttributes<HTMLMyPieChartElement>;
@@ -737,6 +833,7 @@ declare module "@stencil/core" {
             "stop-watch-box": LocalJSX.StopWatchBox & JSXBase.HTMLAttributes<HTMLStopWatchBoxElement>;
             "test-button": LocalJSX.TestButton & JSXBase.HTMLAttributes<HTMLTestButtonElement>;
             "test-counter": LocalJSX.TestCounter & JSXBase.HTMLAttributes<HTMLTestCounterElement>;
+            "users-cards": LocalJSX.UsersCards & JSXBase.HTMLAttributes<HTMLUsersCardsElement>;
         }
     }
 }

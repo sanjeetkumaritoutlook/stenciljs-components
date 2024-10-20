@@ -1,0 +1,6 @@
+:host {
+  display: block;
+}
+app-home ion-scroll {
+  padding: 15px;
+}

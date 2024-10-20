@@ -42,7 +42,7 @@ such as:
 
 This component Library has currently 10 components:
 1. my-progress-bar (Props:value,max)
-2. my-rich-text-editor (Props:initial-value,placeholder,disabled,disableQuickbars)  - this is using tinymce under the hood
+2. my-rich-text-editor (Props:initial-value,placeholder,disabled,disableQuickbars,fontFamily,fontSize)  - this is using tinymce under the hood
 3. my-progress-ring (Props: percentage, round-linecap, disable-digits,event-id) - this is using easing-animation-frames as dependency
 4. my-card (Props:user-name)
 5. search-world (Props:search-text)
@@ -60,6 +60,20 @@ This component Library has currently 10 components:
 17. combo-box (Props:allow-input, label) -> takes time in React to show arbitrary input in dropdown, foucus out of the field after typing 
 18. custom-text-input (uses AttachInternals from StencilJS)
 
+# to find to see the origin of ur local Repo which is in github.
+git remote -v
+Determine the origin of a cloned Git repository
+git ls-remote --get-url origin
+git remote show origin
+
+
+https://sentry.io/answers/determine-the-origin-of-a-cloned-git-repository/
+Update the remote URL with git remote set-url 
+https://support.atlassian.com/bitbucket-cloud/docs/change-the-remote-url-to-your-repository/
+
+# to debug npm installation
+npm install --verbose
+https://stackoverflow.com/questions/16873973/npm-install-hangs
 
 # Component Library or Design system
 Ionic (https://ionicframework.com/) .

@@ -1,5 +1,5 @@
 import { Component, h, Listen,Prop, Event, EventEmitter ,Watch,Element} from '@stencil/core';
-import tinymce from 'tinymce';    //simply import 'tinymce' doesnt work
+import tinymce from 'tinymce/tinymce';    //simply import 'tinymce' doesnt work
 import 'tinymce/models/dom/model';
 
 //https://stackoverflow.com/questions/68951483/tinymce-err-aborted-404-not-found-skins-vue
@@ -60,7 +60,8 @@ export class MyRichTextEditor {
    * Optional placeholder text displayed when the form field is empty.
    */
   @Prop({ mutable: true }) placeholder: string;
-
+  @Prop() fontFamily: string = 'Calibri'; // Default font family doesnt work when initialvalue has font
+  @Prop() fontSize: string = '14px'; // Default font size prop
   @Element() el: HTMLElement;
 
   @Event() valueChange: EventEmitter<string>;
@@ -78,176 +79,190 @@ export class MyRichTextEditor {
       this.editor.setContent(newValue);
     }
   }
+  @Watch('fontFamily')
+  watchFontFamily(newValue: string) {
+    if (this.editor) {
+      this.editor.execCommand('FontName', false, newValue);
+    }
+  }
    //initialize TinyMCE properly within your component. lifecycle method
    componentDidLoad() {
-    // Check if editor is already initialized
-    if (!this.editor) {
-     const textarea : any = this.el
-   .shadowRoot.querySelector('div > #my-tinymce-component');
-     //const useDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    // const isSmallScreen = window.matchMedia('(max-width: 1023.5px)').matches;
-     //this if condition is not required
-     if (textarea) {
-     tinymce.init({
-       //Create a configuration object for TinyMCE. Customize it according to your needs:
-      // selector: 'textarea',
-      target: textarea,  // HTML element convert into a TinyMCE editor.
-       placeholder: this.placeholder,
-        // Other configurations...
-        //https://www.tiny.cloud/docs/configure/integration-and-setup/
-        //https://www.tiny.cloud/docs/configure/editor-appearance/#skin_url
-        //https://www.tiny.cloud/docs/tinymce/latest/basic-setup/ 
-       promotion: false, //hides the Upgrade promotion button
-       license_key: 'gpl',
-       highlight_on_focus: false,
-       //HTML custom font options
-     font_size_formats: '2pt 4pt 6pt 8pt 9pt 10pt 11pt 12pt 14pt 18pt 20pt 22pt 24pt 26pt 28pt 30pt 32pt 34pt 36pt 48pt 60pt 72pt 96pt', 
-     width:'100%',
-      height: 350,
-     //  resize:'both', //https://www.tiny.cloud/docs/tinymce/latest/editor-size-options/
-      theme: 'silver',        // Choose a theme ('modern', 'silver', 'inlite','mobile' etc.)
-      //https://www.tiny.cloud/docs/tinymce/latest/editor-skin/
-      //skin: 'oxide',
-      skin: false,
-      skin_url: 'https://cdn.jsdelivr.net/npm/tinymce@7.3.0/skins/ui/oxide',
-  
-       plugins: ["accordion", "autoresize", "charmap", "code", "directionality", "importcss","help", "fullscreen", "codesample", "table",  "link","advlist", "lists","wordcount","autolink","autosave","save","image","insertdatetime","visualblocks","visualchars","searchreplace","media","quickbars","emoticons","preview","pagebreak","anchor","nonbreaking"],
-      // block_formats: 'Paragraph=p; Header 1=h1; Header 2=h2; Header 3=h3',
-       branding: false,
-        menubar: 'file edit view insert format tools table tc help',
-        toolbar: "undo redo | formatselect  | accordion accordionremove | blocks fontfamily fontsize | bold italic underline strikethrough | align numlist bullist | link image | table media | lineheight outdent indent| forecolor backcolor removeformat | alignleft aligncenter alignright alignjustify | charmap emoticons | code fullscreen preview | save print | pagebreak anchor codesample | ltr rtl",
-      
-        //paste Core plugin options
-       paste_block_drop: false,
-       paste_data_images: true,
-       //paste_as_text: true,   
-     // powerpaste_word_import: 'merge',
-       // mceInsertClipboardContent: true,
-      // noneditable_noneditable_class: 'mceNonEditable',
-      importcss_append: true,
-     toolbar_mode: 'sliding',
-      image_title: true,
-       help_accessibility: false,
-       image_advtab: true,
-       min_height: 350,
-       max_height: 400,
-      quickbars_insert_toolbar: this.disableQuickbars
-      ? false // Disable the quickbars insert toolbar if the prop is true
-      : 'quicktable image media codesample',
-      quickbars_selection_toolbar: this.disableQuickbars
-      ? false // Disable the quickbars selection toolbar if the prop is true
-      : 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',
-       // spellchecker_active: true,
-       // spellchecker_language: 'en_US',
-       // spellchecker_languages: 'English (United States)=en_US,English (United Kingdom)=en_GB,Danish=da,French=fr,German=de,Italian=it,Polish=pl,Spanish=es,Swedish=sv',
-       //directly referencing paths within node_modules is not always recommended.
-       //CSS hacks
-       //https://www.tiny.cloud/blog/css-hacks/
-       //https://github.com/tinymce/tinymce/issues/4886
-       //TinyMCE comes with 17 font options by default.
-       //https://www.tiny.cloud/blog/tinymce-custom-font-family/
-       //https://www.tiny.cloud/docs/tinymce/latest/user-formatting-options/#font_formats
-       //https://www.tiny.cloud/blog/tinymce-google-fonts/
-       //https://fonts.google.com/specimen/EB+Garamond
-       //https://www.tiny.cloud/docs/tinymce/6/migration-from-5x/
-       font_family_formats: `Calibri=Calibri, sans-serif;
-       Andale Mono=andale mono,times;
-       Arial=arial,helvetica,sans-serif; 
-       Arial Black=arial black,avant garde;
-       Noto Serif Devanagari=Noto Serif Devanagari", serif;
-       Book Antiqua=book antiqua,palatino; 
-       Comic Sans MS=comic sans ms,sans-serif; 
-       Courier New=courier new,courier,monospace;
-       Lato Black=lato; 
-       Roboto=Roboto, sans-serif;
-       Bungee=Bungee;
-       Open Sans='Open Sans', sans-serif;
-       Lora=Lora, serif;
-       Montserrat=Montserrat, sans-serif;
-       Garamond=Garamond, serif;
-       Poppins=Poppins;
-       Georgia=georgia,palatino; 
-       Helvetica=helvetica;
-       Impact=impact,chicago; 
-       Oswald=Oswald, sans-serif;
-       Symbol=symbol;
-       Tahoma=tahoma,arial,helvetica,sans-serif; 
-       Terminal=terminal,monaco;
-       Times New Roman=times new roman,times; 
-       Trebuchet MS=trebuchet ms,geneva; 
-       Verdana=verdana,geneva; 
-       Webdings=webdings; 
-       Josefin='Josefin Sans', sans-serif; 
-       Wingdings=wingdings,zapf dingbats`,
-       content_css: 'https://cdn.jsdelivr.net/npm/tinymce@7.3.0/skins/ui/oxide/content.min.css',
-       //  content_style: contentUiCss.toString() + '\n' + contentCss.toString(),
-       //https://www.tiny.cloud/blog/tinymce-css-and-custom-styles/
-      content_style: `
-       @import url('https://fonts.googleapis.com/css2?family=Lato:wght@900&family=Roboto&display=swap');
-       @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-       @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
-       @import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap');
-       @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
-       @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap');
-       @import url('https://fonts.googleapis.com/css2?family=Bungee&family=Open+Sans:ital,wght@0,400;0,700;1,400&display=swap');
-      @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap');
-      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap');
-      @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@100..900&display=swap');
-     @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
-      body { font-family: 'Calibri', sans-serif; }
-     `,
-     
-      //Set the default font: https://www.tiny.cloud/blog/tinymce-custom-font-family/
-        //content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }',
-       //https://www.tiny.cloud/docs/tinymce/latest/tinymce-for-mobile/
-       mobile: {
-         theme: 'silver',
-         width:'100%',
-         height: 350,
-         menubar: true,
-         plugins: ['autosave', 'lists', 'autolink','table', 'link', 'advlist', 'code'],
-         toolbar: 'undo bold italic styleselect fontfamily fontsize',
-       },
-       //setup callback assigns the editor 
-       setup: (editor) => {
-         this.editor = editor; // Store the editor instance
- 
-         editor.on('change keyup', () => {
-           const content = editor.getContent();
-           this.valueChange.emit(content);
-         });
- 
-         editor.on('keyup', () => {
-           console.log('Editor was clicked');
-       });
-        // Add an event listener for the input event
-        editor.on('input', () => {
-         this.handleEditorInput();
-       });
-       editor.on('change', () => {
-         console.log('Editor on change');
-         this.contentChanged.emit(editor.getContent());
-       });
- 
-       editor.on('focus', () => {
-         this.editorFocus.emit();
-       });
- 
-       editor.on('blur', () => {
-         this.editorBlur.emit();
-          tinymce.triggerSave();
-         console.log('Trigger save working');
-       });
-       //https://www.tiny.cloud/docs/tinymce/latest/apis/tinymce.editormode/#set
-       //https://stackoverflow.com/questions/13881812/make-readonly-disable-tinymce-textarea
-       if (this.disabled) {
-         editor.mode.set('readonly');
-       }
-       },
-     });
+    this.initTinyMCE();
+   }
+
+   initTinyMCE() {
+     // Check if editor is already initialized
+     if (!this.editor) {
+      const textarea : any = this.el
+    .shadowRoot.querySelector('div > #my-tinymce-component');
+      //const useDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+     // const isSmallScreen = window.matchMedia('(max-width: 1023.5px)').matches;
+      //this if condition is not required
+      if (textarea) {
+      tinymce.init({
+        //Create a configuration object for TinyMCE. Customize it according to your needs:
+       // selector: 'textarea',
+       target: textarea,  // HTML element convert into a TinyMCE editor.
+        placeholder: this.placeholder,
+         // Other configurations...
+         //https://www.tiny.cloud/docs/configure/integration-and-setup/
+         //https://www.tiny.cloud/docs/configure/editor-appearance/#skin_url
+         //https://www.tiny.cloud/docs/tinymce/latest/basic-setup/ 
+        promotion: false, //hides the Upgrade promotion button
+        license_key: 'gpl',
+        highlight_on_focus: false,
+        //HTML custom font options
+      font_size_formats: '2pt 4pt 6pt 8pt 9pt 10pt 11pt 12pt 14pt 18pt 20pt 22pt 24pt 26pt 28pt 30pt 32pt 34pt 36pt 48pt 60pt 72pt 96pt', 
+      width:'100%',
+       height: 350,
+      //  resize:'both', //https://www.tiny.cloud/docs/tinymce/latest/editor-size-options/
+       theme: 'silver',        // Choose a theme ('modern', 'silver', 'inlite','mobile' etc.)
+       //https://www.tiny.cloud/docs/tinymce/latest/editor-skin/
+       //skin: 'oxide',
+       skin: false,
+       skin_url: 'https://cdn.jsdelivr.net/npm/tinymce@7.3.0/skins/ui/oxide',
    
-   }
-   }
+        plugins: ["accordion", "autoresize", "charmap", "code", "directionality", "importcss","help", "fullscreen", "codesample", "table",  "link","advlist", "lists","wordcount","autolink","autosave","save","image","insertdatetime","visualblocks","visualchars","searchreplace","media","quickbars","emoticons","preview","pagebreak","anchor","nonbreaking"],
+       // block_formats: 'Paragraph=p; Header 1=h1; Header 2=h2; Header 3=h3',
+        branding: false,
+         menubar: 'file edit view insert format tools table tc help',
+         toolbar: "undo redo | formatselect  | accordion accordionremove | blocks fontfamily fontsize | bold italic underline strikethrough | align numlist bullist | link image | table media | lineheight outdent indent| forecolor backcolor removeformat | alignleft aligncenter alignright alignjustify | charmap emoticons | code fullscreen preview | save print | pagebreak anchor codesample | ltr rtl",
+       
+         //paste Core plugin options
+        paste_block_drop: false,
+        paste_data_images: true,
+        //paste_as_text: true,   
+      // powerpaste_word_import: 'merge',
+        // mceInsertClipboardContent: true,
+       // noneditable_noneditable_class: 'mceNonEditable',
+       importcss_append: true,
+      toolbar_mode: 'sliding',
+       image_title: true,
+        help_accessibility: false,
+        image_advtab: true,
+        min_height: 350,
+        max_height: 400,
+       quickbars_insert_toolbar: this.disableQuickbars
+       ? false // Disable the quickbars insert toolbar if the prop is true
+       : 'quicktable image media codesample',
+       quickbars_selection_toolbar: this.disableQuickbars
+       ? false // Disable the quickbars selection toolbar if the prop is true
+       : 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',
+        // spellchecker_active: true,
+        // spellchecker_language: 'en_US',
+        // spellchecker_languages: 'English (United States)=en_US,English (United Kingdom)=en_GB,Danish=da,French=fr,German=de,Italian=it,Polish=pl,Spanish=es,Swedish=sv',
+        //directly referencing paths within node_modules is not always recommended.
+        //CSS hacks
+        //https://www.tiny.cloud/blog/css-hacks/
+        //https://github.com/tinymce/tinymce/issues/4886
+        //TinyMCE comes with 17 font options by default.
+        //https://www.tiny.cloud/blog/tinymce-custom-font-family/
+        //https://www.tiny.cloud/docs/tinymce/latest/user-formatting-options/#font_formats
+        //https://www.tiny.cloud/blog/tinymce-google-fonts/
+        //https://fonts.google.com/specimen/EB+Garamond
+        //https://www.tiny.cloud/docs/tinymce/6/migration-from-5x/
+        font_family_formats: `Calibri=Calibri, sans-serif;
+        Andale Mono=andale mono,times;
+        Arial=arial,helvetica,sans-serif; 
+        Arial Black=arial black,avant garde;
+        Noto Serif Devanagari=Noto Serif Devanagari", serif;
+        Book Antiqua=book antiqua,palatino; 
+        Comic Sans MS=comic sans ms,sans-serif; 
+        Courier New=courier new,courier,monospace;
+        Lato Black=lato; 
+        Roboto=Roboto, sans-serif;
+        Bungee=Bungee;
+        Open Sans='Open Sans', sans-serif;
+        Lora=Lora, serif;
+        Montserrat=Montserrat, sans-serif;
+        Garamond=Garamond, serif;
+        Poppins=Poppins;
+        Georgia=georgia,palatino; 
+        Helvetica=helvetica;
+        Impact=impact,chicago; 
+        Oswald=Oswald, sans-serif;
+        Symbol=symbol;
+        Tahoma=tahoma,arial,helvetica,sans-serif; 
+        Terminal=terminal,monaco;
+        Times New Roman=times new roman,times; 
+        Trebuchet MS=trebuchet ms,geneva; 
+        Verdana=verdana,geneva; 
+        Webdings=webdings; 
+        Josefin='Josefin Sans', sans-serif; 
+        Wingdings=wingdings,zapf dingbats`,
+        content_css: 'https://cdn.jsdelivr.net/npm/tinymce@7.3.0/skins/ui/oxide/content.min.css',
+        //  content_style: contentUiCss.toString() + '\n' + contentCss.toString(),
+        //https://www.tiny.cloud/blog/tinymce-css-and-custom-styles/
+       content_style: `
+        @import url('https://fonts.googleapis.com/css2?family=Lato:wght@900&family=Roboto&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Bungee&family=Open+Sans:ital,wght@0,400;0,700;1,400&display=swap');
+       @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap');
+       @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap');
+       @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@100..900&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
+      }
+      `,
+      
+       //Set the default font: https://www.tiny.cloud/blog/tinymce-custom-font-family/
+         //content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }',
+        //https://www.tiny.cloud/docs/tinymce/latest/tinymce-for-mobile/
+        mobile: {
+          theme: 'silver',
+          width:'100%',
+          height: 350,
+          menubar: true,
+          plugins: ['autosave', 'lists', 'autolink','table', 'link', 'advlist', 'code'],
+          toolbar: 'undo bold italic styleselect fontfamily fontsize',
+        },
+        //setup callback assigns the editor 
+        setup: (editor) => {
+          this.editor = editor; // Store the editor instance
+          editor.on('init', () => {
+            //https://www.tiny.cloud/docs/tinymce/latest/editor-command-identifiers/
+            editor.execCommand('FontName', false, this.fontFamily);
+            editor.getBody().style.fontSize = this.fontSize; // Set default font size
+          });
+          editor.on('change keyup', () => {
+            const content = editor.getContent();
+            this.valueChange.emit(content);
+          });
+  
+          editor.on('keyup', () => {
+            console.log('Editor was clicked');
+        });
+         // Add an event listener for the input event
+         editor.on('input', () => {
+          this.handleEditorInput();
+        });
+        editor.on('change', () => {
+          console.log('Editor on change');
+          this.contentChanged.emit(editor.getContent());
+        });
+  
+        editor.on('focus', () => {
+          this.editorFocus.emit();
+        });
+  
+        editor.on('blur', () => {
+          this.editorBlur.emit();
+           tinymce.triggerSave();
+          console.log('Trigger save working');
+        });
+        //https://www.tiny.cloud/docs/tinymce/latest/apis/tinymce.editormode/#set
+        //https://stackoverflow.com/questions/13881812/make-readonly-disable-tinymce-textarea
+        if (this.disabled) {
+          editor.mode.set('readonly');
+        }
+        },
+      });
+    
+    }
+    }
    }
  
      // Custom logic to handle input events
