@@ -1,4 +1,4 @@
-import { Component,Listen,Prop, h } from '@stencil/core';
+import { Component, h } from '@stencil/core';
 import '@ionic/core';
 //https://ionicframework.com/docs/api/toast
 //https://stackoverflow.com/questions/45588290/proper-way-to-handle-toast-notifications-in-ionic-app
