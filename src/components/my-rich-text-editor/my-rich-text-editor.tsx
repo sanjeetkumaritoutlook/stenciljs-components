@@ -44,6 +44,10 @@ import 'tinymce/plugins/fullscreen';
 import 'tinymce/plugins/importcss';
 import 'tinymce/plugins/visualchars';
 
+//Comparision: https://www.tiny.cloud/tinymce-vs-quill/
+//https://www.tiny.cloud/froala-vs-tinymce/
+//https://froala.com/blog/editor/compare-froala-tinymce-the-best-wysiwyg-editor/
+
 @Component({
   tag: 'my-rich-text-editor',
   styleUrl: 'my-rich-text-editor.css',
@@ -61,7 +65,7 @@ export class MyRichTextEditor {
    */
   @Prop({ mutable: true }) placeholder: string;
   @Prop() fontFamily: string = 'Calibri'; // Default font family doesnt work when initialvalue has font
-  @Prop() fontSize: string = '14px'; // Default font size prop
+  @Prop() fontSize: string; // Default font size prop
   @Element() el: HTMLElement;
 
   @Event() valueChange: EventEmitter<string>;
@@ -85,6 +89,13 @@ export class MyRichTextEditor {
       this.editor.execCommand('FontName', false, newValue);
     }
   }
+    // Watch for changes to fontSize
+ @Watch('fontSize')
+ watchFontSizeHandler(newValue: string) {
+   if (this.editor) {
+     this.editor.execCommand('fontSize', false, newValue);
+   }
+ }
    //initialize TinyMCE properly within your component. lifecycle method
    componentDidLoad() {
     this.initTinyMCE();
@@ -120,7 +131,7 @@ export class MyRichTextEditor {
        //https://www.tiny.cloud/docs/tinymce/latest/editor-skin/
        //skin: 'oxide',
        skin: false,
-       skin_url: 'https://cdn.jsdelivr.net/npm/tinymce@7.3.0/skins/ui/oxide',
+       skin_url: 'https://cdn.jsdelivr.net/npm/tinymce@7.3.0/skins/ui/oxide/',
    
         plugins: ["accordion", "autoresize", "charmap", "code", "directionality", "importcss","help", "fullscreen", "codesample", "table",  "link","advlist", "lists","wordcount","autolink","autosave","save","image","insertdatetime","visualblocks","visualchars","searchreplace","media","quickbars","emoticons","preview","pagebreak","anchor","nonbreaking"],
        // block_formats: 'Paragraph=p; Header 1=h1; Header 2=h2; Header 3=h3',
@@ -131,7 +142,27 @@ export class MyRichTextEditor {
          //paste Core plugin options
         paste_block_drop: false,
         paste_data_images: true,
-        //paste_as_text: true,   
+        paste_as_text: false, // Keep this false to retain formatting
+        valid_elements: '*[*]', // Allow all elements and attributes   
+        allow_html_in_named_anchor: true,
+        emoticons_append: {
+          custom_mind_explode: {
+            keywords: [ 'brain', 'mind', 'explode', 'blown' ],
+            char: '🤯',
+            category: 'Genius'
+          },
+          robot: {
+            keywords: [ 'computer', 'machine', 'bot' ],
+            char: '🤖',
+            category: 'AI'
+          },
+          dog: {
+            keywords: [ 'animal', 'friend', 'nature', 'woof', 'puppy', 'pet', 'faithful' ],
+            char: '🐶',
+            category: 'Nature'
+          }
+        },
+      
       // powerpaste_word_import: 'merge',
         // mceInsertClipboardContent: true,
        // noneditable_noneditable_class: 'mceNonEditable',
@@ -176,6 +207,7 @@ export class MyRichTextEditor {
         Lora=Lora, serif;
         Montserrat=Montserrat, sans-serif;
         Garamond=Garamond, serif;
+        EB Garamond='EB Garamond', serif;
         Poppins=Poppins;
         Georgia=georgia,palatino; 
         Helvetica=helvetica;
@@ -190,7 +222,7 @@ export class MyRichTextEditor {
         Webdings=webdings; 
         Josefin='Josefin Sans', sans-serif; 
         Wingdings=wingdings,zapf dingbats`,
-        content_css: 'https://cdn.jsdelivr.net/npm/tinymce@7.3.0/skins/ui/oxide/content.min.css',
+        content_css: 'https://cdn.jsdelivr.net/npm/tinymce@7.4.1/skins/ui/oxide/content.min.css',
         //  content_style: contentUiCss.toString() + '\n' + contentCss.toString(),
         //https://www.tiny.cloud/blog/tinymce-css-and-custom-styles/
        content_style: `
@@ -201,7 +233,8 @@ export class MyRichTextEditor {
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Bungee&family=Open+Sans:ital,wght@0,400;0,700;1,400&display=swap');
-       @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Garamond&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap');
        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap');
        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@100..900&display=swap');
       @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
@@ -225,7 +258,9 @@ export class MyRichTextEditor {
           editor.on('init', () => {
             //https://www.tiny.cloud/docs/tinymce/latest/editor-command-identifiers/
             editor.execCommand('FontName', false, this.fontFamily);
-            editor.getBody().style.fontSize = this.fontSize; // Set default font size
+            //https://www.tiny.cloud/blog/tinymce-exec-commands/
+          //https://stackoverflow.com/questions/5868295/document-execcommand-fontsize-in-pixels
+          editor.execCommand('fontSize', false, this.fontSize);
           });
           editor.on('change keyup', () => {
             const content = editor.getContent();

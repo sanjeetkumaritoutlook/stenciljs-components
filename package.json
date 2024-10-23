@@ -60,6 +60,6 @@
     "d3": "^7.9.0",
     "easing-animation-frames": "^1.0.6",
     "stencil-router-v2": "^0.6.0",
-    "tinymce": "^7.3.0"
+    "tinymce": "^7.4.1"
   }
 }
