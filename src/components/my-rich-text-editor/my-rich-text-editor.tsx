@@ -131,7 +131,7 @@ export class MyRichTextEditor {
        //https://www.tiny.cloud/docs/tinymce/latest/editor-skin/
        //skin: 'oxide',
        skin: false,
-       skin_url: 'https://cdn.jsdelivr.net/npm/tinymce@7.3.0/skins/ui/oxide/',
+       skin_url: 'https://cdn.jsdelivr.net/npm/tinymce@7.4.1/skins/ui/oxide/',
    
         plugins: ["accordion", "autoresize", "charmap", "code", "directionality", "importcss","help", "fullscreen", "codesample", "table",  "link","advlist", "lists","wordcount","autolink","autosave","save","image","insertdatetime","visualblocks","visualchars","searchreplace","media","quickbars","emoticons","preview","pagebreak","anchor","nonbreaking"],
        // block_formats: 'Paragraph=p; Header 1=h1; Header 2=h2; Header 3=h3',
