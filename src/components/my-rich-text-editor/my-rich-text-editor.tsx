@@ -55,6 +55,17 @@ import 'tinymce/plugins/visualchars';
 })
 export class MyRichTextEditor {
   private editor: any; // Store a reference to the TinyMCE editor instance
+ /**
+   * Reference to the "root" TinyMCE container element that contains
+   * the Editor's menubar, toolbar, & <iframe>.
+   */
+ //private _containerRef: HTMLElement;
+
+ /**
+  * Reference to the element used to initialize the TinyMCE Editor
+  * (i.e. element passed to the "target" property in the init() method).
+  */
+ private _targetRef: HTMLElement;
  
   @Prop({ mutable: true, reflect: true }) initialValue: string;
   //to control whether the tinymce editor is editable
@@ -104,16 +115,15 @@ export class MyRichTextEditor {
    initTinyMCE() {
      // Check if editor is already initialized
      if (!this.editor) {
-      const textarea : any = this.el
-    .shadowRoot.querySelector('div > #my-tinymce-component');
+    //   const textarea : any = this.el
+    // .shadowRoot.querySelector('div > #my-tinymce-component');
       //const useDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
      // const isSmallScreen = window.matchMedia('(max-width: 1023.5px)').matches;
-      //this if condition is not required
-      if (textarea) {
+     
       tinymce.init({
         //Create a configuration object for TinyMCE. Customize it according to your needs:
        // selector: 'textarea',
-       target: textarea,  // HTML element convert into a TinyMCE editor.
+       target: this._targetRef,  // HTML element convert into a TinyMCE editor.
         placeholder: this.placeholder,
          // Other configurations...
          //https://www.tiny.cloud/docs/configure/integration-and-setup/
@@ -122,6 +132,7 @@ export class MyRichTextEditor {
         promotion: false, //hides the Upgrade promotion button
         license_key: 'gpl',
         highlight_on_focus: false,
+        browser_spellcheck: true,
         //HTML custom font options
       font_size_formats: '2pt 4pt 6pt 8pt 9pt 10pt 11pt 12pt 14pt 18pt 20pt 22pt 24pt 26pt 28pt 30pt 32pt 34pt 36pt 48pt 60pt 72pt 96pt', 
       width:'100%',
@@ -131,8 +142,9 @@ export class MyRichTextEditor {
        //https://www.tiny.cloud/docs/tinymce/latest/editor-skin/
        //skin: 'oxide',
        skin: false,
-       skin_url: 'https://cdn.jsdelivr.net/npm/tinymce@7.4.1/skins/ui/oxide/',
-   
+         //last backslash should not be given in url as it doesnt work in testing
+      //and also to make placeholder work in angular and react
+     skin_url: 'https://cdn.jsdelivr.net/npm/tinymce@7.4.1/skins/ui/oxide',
         plugins: ["accordion", "autoresize", "charmap", "code", "directionality", "importcss","help", "fullscreen", "codesample", "table",  "link","advlist", "lists","wordcount","autolink","autosave","save","image","insertdatetime","visualblocks","visualchars","searchreplace","media","quickbars","emoticons","preview","pagebreak","anchor","nonbreaking"],
        // block_formats: 'Paragraph=p; Header 1=h1; Header 2=h2; Header 3=h3',
         branding: false,
@@ -296,7 +308,7 @@ export class MyRichTextEditor {
         },
       });
     
-    }
+    
     }
    }
  
@@ -348,10 +360,12 @@ export class MyRichTextEditor {
   render() {
     let editorId = `editor-${Math.floor(Math.random() * 1000)}`;
     return (
-      <div id={editorId}>
+      <div>
        {/* <button onClick={() => this.handleEvent()}>Click me</button> */}
        <h1>RTF editor</h1>
-       <div id="my-tinymce-component"
+       <div 
+       id={editorId}
+       ref={(el: HTMLElement) => (this._targetRef = el)}
         innerHTML={this.initialValue}
         aria-disabled={this.disabled}
         aria-placeholder={this.placeholder}></div>

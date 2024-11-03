@@ -1,0 +1,33 @@
+[ ERROR ]  Could not find Chromium (rev. 1108766). 
+This can occur if either 1. you did not perform an installation
+           before running the script (e.g. `npm install`) or
+ 2. your cache path is incorrectly configured (which is:
+           C:\Users\Sanjeet\.cache\puppeteer). For (2), check out our guide on configuring puppeteer at
+           https://pptr.dev/guides/configuration. Error: Could not find Chromium (rev. 1108766). This can occur if
+           either 1. you did not perform an installation before running the script (e.g. `npm install`) or 2. your
+           cache path is incorrectly configured (which is: C:\Users\Sanjeet\.cache\puppeteer). For (2), check out our
+           guide on configuring puppeteer at https://pptr.dev/guides/configuration. at
+           ChromeLauncher.resolveExecutablePath
+           (D:\Sanjeet\StencilJS\my-first-stencil-project\node_modules\puppeteer-core\lib\cjs\puppeteer\node\ProductLauncher.js:289:2
+------------------------------
+
+  Puppeteer old Headless deprecation warning:
+    In the near feature `headless: true` will default to the new Headless mode
+    for Chrome instead of the old Headless implementation. For more
+    information, please see https://developer.chrome.com/articles/new-headless/.
+    Consider opting in early by passing `headless: "new"` to `puppeteer.launch()`
+    If you encounter any bugs, please report them to https://github.com/puppeteer/puppeteer/issues/new/choose.
+----------------
+npm install puppeteer --force
+---------
+Clear Puppeteer Cache: Start by clearing Puppeteer's cache. You can do this by deleting the C:\Users\Sanjeet\.cache\puppeteer folder manually, then rerun the installation with npm install.
+
+set PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+https://stackoverflow.com/questions/59088731/error-failed-to-download-chromium-r686378-set-puppeteer-skip-chromium-downloa
+
+this worked:
+npm install  puppeteer --unsafe-perm=true --allow-root 
+(before this uninstall puppeteer)
+https://stackoverflow.com/questions/59088731/error-failed-to-download-chromium-r686378-set-puppeteer-skip-chromium-downloa
+
+before that deleted C:\Users\Sanjeet\.cache\puppeteer folder (but it may not be required)

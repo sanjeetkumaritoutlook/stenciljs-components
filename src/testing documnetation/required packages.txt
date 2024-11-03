@@ -1,0 +1,6 @@
+need to install:
+npm i jest-junit
+npm i jest-json-reporter
+---
+npm uninstall puppeteer
+npm install  puppeteer --unsafe-perm=true --allow-root 

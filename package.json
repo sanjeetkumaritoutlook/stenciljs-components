@@ -1,6 +1,6 @@
 {
   "name": "stenciljs-components",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "A collection of StencilJS UI components.",
   "main": "dist/index.cjs.js",
   "module": "dist/index.js",
@@ -43,8 +43,7 @@
     "@types/jest": "^29.5.6",
     "@types/node": "^16.18.11",
     "jest": "^29.7.0",
-    "jest-cli": "^29.7.0",
-    "puppeteer": "^21.9.0"
+    "jest-cli": "^29.7.0"
   },
   "keywords": [
     "stencil",
@@ -59,6 +58,9 @@
     "@stripe/stripe-js": "^4.7.0",
     "d3": "^7.9.0",
     "easing-animation-frames": "^1.0.6",
+    "jest-json-reporter": "^1.2.2",
+    "jest-junit": "^16.0.0",
+    "puppeteer": "^23.6.1",
     "stencil-router-v2": "^0.6.0",
     "tinymce": "^7.4.1"
   }
