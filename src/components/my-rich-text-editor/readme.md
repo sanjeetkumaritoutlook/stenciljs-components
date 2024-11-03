@@ -12,7 +12,7 @@
 | `disableQuickbars` | `disable-quickbars` |                                                                   | `boolean` | `false`     |
 | `disabled`         | `disabled`          |                                                                   | `boolean` | `false`     |
 | `fontFamily`       | `font-family`       |                                                                   | `string`  | `'Calibri'` |
-| `fontSize`         | `font-size`         |                                                                   | `string`  | `'14px'`    |
+| `fontSize`         | `font-size`         |                                                                   | `string`  | `undefined` |
 | `initialValue`     | `initial-value`     |                                                                   | `string`  | `undefined` |
 | `placeholder`      | `placeholder`       | Optional placeholder text displayed when the form field is empty. | `string`  | `undefined` |
 
