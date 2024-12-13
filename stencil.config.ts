@@ -17,6 +17,7 @@ export const config: Config = {
     },
     {
       type: 'www',
+      baseUrl: 'stenciljs-components', // Add this line (in FLUID also its there)
       serviceWorker: null, // disable service workers
     },
   ],
