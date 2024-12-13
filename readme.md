@@ -122,6 +122,11 @@ and run:
 npm install
 npm start
 ```
+To generate new component, run:
+
+```bash
+npm run generate
+```
 
 To build the component for production, run:
 
