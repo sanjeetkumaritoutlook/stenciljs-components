@@ -43,7 +43,7 @@ jobs:
       - name: Upload artifact for Pages
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./www  # Path to your build output directory
+          path: ./www/stenciljs-components  # Path to your build output directory
 
       - name: Check if www folder exists
         run: |
