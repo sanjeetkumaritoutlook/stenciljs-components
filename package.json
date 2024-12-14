@@ -1,12 +1,10 @@
 {
   "name": "stenciljs-components",
-  "version": "1.0.10",
+  "version": "1.0.13",
   "description": "A collection of StencilJS UI components.",
   "homepage": "https://sanjeetkumaritoutlook.github.io/stenciljs-components/",
   "main": "dist/index.cjs.js",
   "module": "dist/index.js",
-  "es2015": "dist/esm/index.mjs",
-  "es2017": "dist/esm/index.mjs",
   "types": "dist/types/index.d.ts",
   "collection": "dist/collection/collection-manifest.json",
   "collection:main": "dist/collection/index.js",
@@ -22,7 +20,7 @@
     },
     "./loader": {
       "import": "./loader/index.js",
-      "require": "./loader/index.cjs",
+      "require": "./loader/index.cjs.js",
       "types": "./loader/index.d.ts"
     }
   },
