@@ -1,11 +1,11 @@
 [![Built With Stencil](https://img.shields.io/badge/-Built%20With%20Stencil-16161d.svg?logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDE5LjIuMSwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHZlcnNpb249IjEuMSIgaWQ9IkxheWVyXzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IgoJIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCA1MTIgNTEyOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI%2BCjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI%2BCgkuc3Qwe2ZpbGw6I0ZGRkZGRjt9Cjwvc3R5bGU%2BCjxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik00MjQuNywzNzMuOWMwLDM3LjYtNTUuMSw2OC42LTkyLjcsNjguNkgxODAuNGMtMzcuOSwwLTkyLjctMzAuNy05Mi43LTY4LjZ2LTMuNmgzMzYuOVYzNzMuOXoiLz4KPHBhdGggY2xhc3M9InN0MCIgZD0iTTQyNC43LDI5Mi4xSDE4MC40Yy0zNy42LDAtOTIuNy0zMS05Mi43LTY4LjZ2LTMuNkgzMzJjMzcuNiwwLDkyLjcsMzEsOTIuNyw2OC42VjI5Mi4xeiIvPgo8cGF0aCBjbGFzcz0ic3QwIiBkPSJNNDI0LjcsMTQxLjdIODcuN3YtMy42YzAtMzcuNiw1NC44LTY4LjYsOTIuNy02OC42SDMzMmMzNy45LDAsOTIuNywzMC43LDkyLjcsNjguNlYxNDEuN3oiLz4KPC9zdmc%2BCg%3D%3D&colorA=16161d&style=flat-square)](https://stenciljs.com)
 
 # To start using components from this Library
-for example in Angular/React: 
+# for example in Angular/React: 
 ```bash
 npm i stenciljs-components
 ```
-then in main.ts (Angular)/ index.tsx (React):
+then in main.ts (Angular)/ in React component file (React):
 ```tsx
 import { defineCustomElements } from 'stenciljs-components/loader';
 // Initialize the custom elements
@@ -37,10 +37,24 @@ such as:
  <complex-ionic-form></complex-ionic-form>
  <custom-form></custom-form>
  <combo-box allow-input="true"></combo-box>
+ <new-card><new-card>
 ```
 
+# for usage in an another Application created using StencilJS: 
+first way is include in ur StencilJS component (so that Lazy loading can work):
+```tsx
+import { defineCustomElements } from 'stenciljs-components/loader';
+// Initialize the custom elements
+defineCustomElements(window);
+IF above way doesnt work due to some js not loading or resouurce not found for this build time library,
+then include below code in src/index.html as run-time library
+```html
+<script type="module" src="https://sanjeetkumaritoutlook.github.io/stenciljs-components/build/stenciljs-components.esm.js"></script>
+  <script nomodule src="https://sanjeetkumaritoutlook.github.io/stenciljs-components/build/stenciljs-components.js"></script>
+ 
+```
 
-This component Library has currently 10 components:
+# This component Library has currently 19 components:
 1. my-progress-bar (Props:value,max)
 2. my-rich-text-editor (Props:initial-value,placeholder,disabled,disableQuickbars,fontFamily,fontSize)  - this is using tinymce under the hood
 3. my-progress-ring (Props: percentage, round-linecap, disable-digits,event-id) - this is using easing-animation-frames as dependency
@@ -51,7 +65,7 @@ This component Library has currently 10 components:
 8. my-pie-chart  (Props: data[JSON format where each entry contains only tag and value (in numbers) as keys])  - this is using d3.js under the hood
 9. my-payment-gateway - this is using StripeJS payment gateway under the hood
 10. my-component (Props:first,middle,last)- default StencilJS Component
-11. my-button (Props:text)
+11. my-button (Props:label,variant)
 12. parent-component (uses embed-component inside it)
 13. embed-component
 14. simple-form (Props: first-name, last-name; form built using ionic components)
@@ -59,6 +73,7 @@ This component Library has currently 10 components:
 16. custom-form (uses combo-box and custom-text-input)
 17. combo-box (Props:allow-input, label) -> takes time in React to show arbitrary input in dropdown, foucus out of the field after typing 
 18. custom-text-input (uses AttachInternals from StencilJS)
+19. new-card
 
 # to find to see the origin of ur local Repo which is in github.
 git remote -v

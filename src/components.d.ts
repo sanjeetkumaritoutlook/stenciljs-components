@@ -41,7 +41,9 @@ export namespace Components {
         "width": number;
     }
     interface MyButton {
-        "text": string;
+        "disabled": boolean;
+        "label": string;
+        "variant": 'primary' | 'secondary';
     }
     interface MyCard {
         "userName": string;
@@ -140,6 +142,8 @@ export namespace Components {
           * Optional placeholder text displayed when the form field is empty.
          */
         "placeholder": string;
+    }
+    interface NewCard {
     }
     interface NiceAlert {
         "message": string;
@@ -432,6 +436,12 @@ declare global {
         prototype: HTMLMyRichTextEditorElement;
         new (): HTMLMyRichTextEditorElement;
     };
+    interface HTMLNewCardElement extends Components.NewCard, HTMLStencilElement {
+    }
+    var HTMLNewCardElement: {
+        prototype: HTMLNewCardElement;
+        new (): HTMLNewCardElement;
+    };
     interface HTMLNiceAlertElementEventMap {
         "alertDismissed": any;
     }
@@ -555,6 +565,7 @@ declare global {
         "my-progress-bar": HTMLMyProgressBarElement;
         "my-progress-ring": HTMLMyProgressRingElement;
         "my-rich-text-editor": HTMLMyRichTextEditorElement;
+        "new-card": HTMLNewCardElement;
         "nice-alert": HTMLNiceAlertElement;
         "parent-component": HTMLParentComponentElement;
         "search-world": HTMLSearchWorldElement;
@@ -597,8 +608,10 @@ declare namespace LocalJSX {
         "width"?: number;
     }
     interface MyButton {
+        "disabled"?: boolean;
+        "label"?: string;
         "onMyEvent"?: (event: MyButtonCustomEvent<apiData>) => void;
-        "text"?: string;
+        "variant"?: 'primary' | 'secondary';
     }
     interface MyCard {
         "userName"?: string;
@@ -731,6 +744,8 @@ declare namespace LocalJSX {
          */
         "placeholder"?: string;
     }
+    interface NewCard {
+    }
     interface NiceAlert {
         "message"?: string;
         "onAlertDismissed"?: (event: NiceAlertCustomEvent<any>) => void;
@@ -790,6 +805,7 @@ declare namespace LocalJSX {
         "my-progress-bar": MyProgressBar;
         "my-progress-ring": MyProgressRing;
         "my-rich-text-editor": MyRichTextEditor;
+        "new-card": NewCard;
         "nice-alert": NiceAlert;
         "parent-component": ParentComponent;
         "search-world": SearchWorld;
@@ -824,6 +840,7 @@ declare module "@stencil/core" {
             "my-progress-bar": LocalJSX.MyProgressBar & JSXBase.HTMLAttributes<HTMLMyProgressBarElement>;
             "my-progress-ring": LocalJSX.MyProgressRing & JSXBase.HTMLAttributes<HTMLMyProgressRingElement>;
             "my-rich-text-editor": LocalJSX.MyRichTextEditor & JSXBase.HTMLAttributes<HTMLMyRichTextEditorElement>;
+            "new-card": LocalJSX.NewCard & JSXBase.HTMLAttributes<HTMLNewCardElement>;
             "nice-alert": LocalJSX.NiceAlert & JSXBase.HTMLAttributes<HTMLNiceAlertElement>;
             "parent-component": LocalJSX.ParentComponent & JSXBase.HTMLAttributes<HTMLParentComponentElement>;
             "search-world": LocalJSX.SearchWorld & JSXBase.HTMLAttributes<HTMLSearchWorldElement>;

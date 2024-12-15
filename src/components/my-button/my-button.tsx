@@ -15,9 +15,11 @@ import { apiData } from './types';
   shadow: true,
 })
 export class MyButton {
-  @Prop() text: string;
+  @Prop() label: string;
   @State() count: number = 0;
   @State() data: apiData;
+  @Prop() variant: 'primary' | 'secondary' = 'primary'; // default type is 'primary'
+  @Prop() disabled: boolean = false;
 
   @Event() myEvent: EventEmitter<apiData>;
 
@@ -41,7 +43,10 @@ export class MyButton {
         <slot name="choose"></slot>
         <h2 class="dynamic api data">{this.data ? this.data.title : 'loading...'}</h2>
         <slot></slot>
-        <button onClick={this.handleClick}>{this.text}</button>
+        <button 
+         class={`button ${this.variant}`}
+         disabled={this.disabled}
+         onClick={this.handleClick}>{this.label}</button>
       </Host>
     );
   }
