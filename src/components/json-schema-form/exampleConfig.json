@@ -1,0 +1,124 @@
+{
+    "fields": [
+      {
+        "type": "text",
+        "name": "username",
+        "label": "Username",
+        "placeholder": "Enter your username",
+        "required": true
+      },
+      {
+        "type": "date",
+        "name": "dob",
+        "label": "Date of Birth",
+        "required": true
+      },
+      {
+        "type": "checkbox",
+        "name": "subscribe",
+        "label": "Subscribe to newsletter",
+        "required": false
+      },
+      {
+        "type": "radio",
+        "name": "gender",
+        "label": "Gender",
+        "options": [
+          { "label": "Male", "value": "male" },
+          { "label": "Female", "value": "female" }
+        ],
+        "required": true
+      },
+      {
+        "type": "array",
+        "name": "skills",
+        "label": "Skills",
+        "placeholder": "Enter a skill",
+        "required": false
+      },
+      {
+        "type": "select",
+        "name": "country",
+        "label": "Country",
+        "options": [
+          { "label": "USA", "value": "usa" },
+          { "label": "India", "value": "india" }
+        ],
+        "required": true
+      },
+      {
+        "type": "text",
+        "name": "firstName",
+        "label": "First Name",
+        "required": true
+      },
+      {
+        "type": "array",
+        "name": "experiences",
+        "label": "Work Experiences",
+        "required": false,
+        "items": [
+          {
+            "type": "text",
+            "name": "companyName",
+            "label": "Company Name",
+            "required": true
+          },
+          {
+            "type": "date",
+            "name": "startDate",
+            "label": "Start Date",
+            "required": true
+          },
+          {
+            "type": "date",
+            "name": "endDate",
+            "label": "End Date",
+            "required": true
+          },
+          {
+            "type": "select",
+            "name": "role",
+            "label": "Role",
+            "options": [
+              { "label": "Developer", "value": "developer" },
+              { "label": "Designer", "value": "designer" },
+              { "label": "Manager", "value": "manager" }
+            ],
+            "required": true
+          }
+        ]
+      },
+      {
+        "type": "textarea",
+        "name": "comments",
+        "label": "Comments",
+        "placeholder": "Write your comments here...",
+        "conditionalOn": { "field": "gender", "value": "female" }, 
+        "required": true,
+        "maxLength": 200,
+      "minLength": 10,
+      "errorMessage": "Comments must be between 10 and 200 characters."
+      },
+      {
+        "type": "combo-box",
+        "name": "favoriteFruit",
+        "label": "Favorite Fruit",
+        "placeholder": "Type or select a fruit...",
+        "required": true,
+        "options": [
+          { "label": "Apple", "value": "apple" },
+          { "label": "Banana", "value": "banana" },
+          { "label": "Cherry", "value": "cherry" }
+        ]
+      },
+      {
+        "type": "my-rich-text-editor",
+        "name": "bio",
+        "label": "Bio",
+        "placeholder": "Write your biography...",
+        "required": true
+      }
+    ]
+  }
+  

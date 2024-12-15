@@ -83,8 +83,19 @@ export class MyRichTextEditor {
   @Event() editorFocus: EventEmitter<void>;
   @Event() editorBlur: EventEmitter<void>;
   @Event() contentChanged: EventEmitter<any>;
-  
+  @Prop() value: string = ''; // The value from the parent  json-schema-form
+  @Prop() name: string = '';
 
+  // Define an event emitter to notify the parent (json-schema-form) of changes
+  @Event() valueChanged: EventEmitter;
+
+  // This is called when the user types into the rich text editor
+  handleInput = (e: Event) => {
+    //const target = this._targetRef as HTMLElement;
+    const newValue = this.editor.getContent(); // Capture the content of the editor
+    console.log('Event details:', e); // Example: logging the event
+    this.valueChanged.emit({ name: this.name, value: newValue }); // Emit the updated value
+};
   constructor() {
     
   }
@@ -320,9 +331,7 @@ export class MyRichTextEditor {
        console.log('Editor content on input changed:', editorContent);
      }
    @Listen('input', { target: 'document' })
-   handleInput() {
-     // Handle input events if needed
-   }
+  
    
    
    //Before performing any operations- GET or SET- ensure that the this.editor instance is available
@@ -366,9 +375,10 @@ export class MyRichTextEditor {
        <div 
        id={editorId}
        ref={(el: HTMLElement) => (this._targetRef = el)}
-        innerHTML={this.initialValue}
+        innerHTML={this.value || this.initialValue}
         aria-disabled={this.disabled}
-        aria-placeholder={this.placeholder}></div>
+        aria-placeholder={this.placeholder}
+        onInput={(e) => this.handleInput(e)}></div>
        <button onClick={() => this.getContentFromEditor()}>Get Content/Save </button>
        <button onClick={() => this.setContentInEditor('')}>Clear Content</button>
      </div>

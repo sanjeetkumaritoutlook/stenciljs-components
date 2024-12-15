@@ -34,6 +34,9 @@ export namespace Components {
     interface EmbedComponent {
         "color": string;
     }
+    interface JsonSchemaForm {
+        "schema": string;
+    }
     interface LazyImg {
         "alt": string;
         "isServer": boolean;
@@ -138,10 +141,12 @@ export namespace Components {
         "fontFamily": string;
         "fontSize": string;
         "initialValue": string;
+        "name": string;
         /**
           * Optional placeholder text displayed when the form field is empty.
          */
         "placeholder": string;
+        "value": string;
     }
     interface NewCard {
     }
@@ -306,6 +311,12 @@ declare global {
         prototype: HTMLEmbedComponentElement;
         new (): HTMLEmbedComponentElement;
     };
+    interface HTMLJsonSchemaFormElement extends Components.JsonSchemaForm, HTMLStencilElement {
+    }
+    var HTMLJsonSchemaFormElement: {
+        prototype: HTMLJsonSchemaFormElement;
+        new (): HTMLJsonSchemaFormElement;
+    };
     interface HTMLLazyImgElementEventMap {
         "lazyImgloaded": HTMLImageElement;
     }
@@ -421,6 +432,7 @@ declare global {
         "editorFocus": void;
         "editorBlur": void;
         "contentChanged": any;
+        "valueChanged": any;
     }
     interface HTMLMyRichTextEditorElement extends Components.MyRichTextEditor, HTMLStencilElement {
         addEventListener<K extends keyof HTMLMyRichTextEditorElementEventMap>(type: K, listener: (this: HTMLMyRichTextEditorElement, ev: MyRichTextEditorCustomEvent<HTMLMyRichTextEditorElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -554,6 +566,7 @@ declare global {
         "custom-form": HTMLCustomFormElement;
         "custom-text-input": HTMLCustomTextInputElement;
         "embed-component": HTMLEmbedComponentElement;
+        "json-schema-form": HTMLJsonSchemaFormElement;
         "lazy-img": HTMLLazyImgElement;
         "my-button": HTMLMyButtonElement;
         "my-card": HTMLMyCardElement;
@@ -599,6 +612,9 @@ declare namespace LocalJSX {
     interface EmbedComponent {
         "color"?: string;
         "onWrite"?: (event: EmbedComponentCustomEvent<string>) => void;
+    }
+    interface JsonSchemaForm {
+        "schema"?: string;
     }
     interface LazyImg {
         "alt"?: string;
@@ -735,14 +751,17 @@ declare namespace LocalJSX {
         "fontFamily"?: string;
         "fontSize"?: string;
         "initialValue"?: string;
+        "name"?: string;
         "onContentChanged"?: (event: MyRichTextEditorCustomEvent<any>) => void;
         "onEditorBlur"?: (event: MyRichTextEditorCustomEvent<void>) => void;
         "onEditorFocus"?: (event: MyRichTextEditorCustomEvent<void>) => void;
         "onValueChange"?: (event: MyRichTextEditorCustomEvent<string>) => void;
+        "onValueChanged"?: (event: MyRichTextEditorCustomEvent<any>) => void;
         /**
           * Optional placeholder text displayed when the form field is empty.
          */
         "placeholder"?: string;
+        "value"?: string;
     }
     interface NewCard {
     }
@@ -794,6 +813,7 @@ declare namespace LocalJSX {
         "custom-form": CustomForm;
         "custom-text-input": CustomTextInput;
         "embed-component": EmbedComponent;
+        "json-schema-form": JsonSchemaForm;
         "lazy-img": LazyImg;
         "my-button": MyButton;
         "my-card": MyCard;
@@ -829,6 +849,7 @@ declare module "@stencil/core" {
             "custom-form": LocalJSX.CustomForm & JSXBase.HTMLAttributes<HTMLCustomFormElement>;
             "custom-text-input": LocalJSX.CustomTextInput & JSXBase.HTMLAttributes<HTMLCustomTextInputElement>;
             "embed-component": LocalJSX.EmbedComponent & JSXBase.HTMLAttributes<HTMLEmbedComponentElement>;
+            "json-schema-form": LocalJSX.JsonSchemaForm & JSXBase.HTMLAttributes<HTMLJsonSchemaFormElement>;
             "lazy-img": LocalJSX.LazyImg & JSXBase.HTMLAttributes<HTMLLazyImgElement>;
             "my-button": LocalJSX.MyButton & JSXBase.HTMLAttributes<HTMLMyButtonElement>;
             "my-card": LocalJSX.MyCard & JSXBase.HTMLAttributes<HTMLMyCardElement>;

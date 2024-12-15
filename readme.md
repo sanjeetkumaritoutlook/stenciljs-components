@@ -54,26 +54,27 @@ then include below code in src/index.html as run-time library
  
 ```
 
-# This component Library has currently 19 components:
-1. my-progress-bar (Props:value,max)
-2. my-rich-text-editor (Props:initial-value,placeholder,disabled,disableQuickbars,fontFamily,fontSize)  - this is using tinymce under the hood
-3. my-progress-ring (Props: percentage, round-linecap, disable-digits,event-id) - this is using easing-animation-frames as dependency
-4. my-card (Props:user-name)
-5. search-world (Props:search-text)
-6. test-button (Props:button-id)
-7. test-counter
-8. my-pie-chart  (Props: data[JSON format where each entry contains only tag and value (in numbers) as keys])  - this is using d3.js under the hood
-9. my-payment-gateway - this is using StripeJS payment gateway under the hood
-10. my-component (Props:first,middle,last)- default StencilJS Component
-11. my-button (Props:label,variant)
-12. parent-component (uses embed-component inside it)
-13. embed-component
-14. simple-form (Props: first-name, last-name; form built using ionic components)
-15. complex-ionic-form  (form built using ionic components)
-16. custom-form (uses combo-box and custom-text-input)
-17. combo-box (Props:allow-input, label) -> takes time in React to show arbitrary input in dropdown, foucus out of the field after typing 
-18. custom-text-input (uses AttachInternals from StencilJS)
-19. new-card
+# This component Library has currently 20 components:
+1. json-schema-form (creates dynamic form with field type like 'select','array', 'text', 'combo-box', 'radio','textarea','my-rich-text-editor','checkbox'. It take properties like type,name,label ,required.  Fields can be conditionally rendered also with ConditionalOn)
+2. my-progress-bar (Props:value,max)
+3. my-rich-text-editor (Props:initial-value,placeholder,disabled,disableQuickbars,fontFamily,fontSize)  - this is using tinymce under the hood
+4. my-progress-ring (Props: percentage, round-linecap, disable-digits,event-id) - this is using easing-animation-frames as dependency
+5. my-card (Props:user-name)
+6. search-world (Props:search-text)
+7. test-button (Props:button-id)
+8. test-counter
+9. my-pie-chart  (Props: data[JSON format where each entry contains only tag and value (in numbers) as keys])  - this is using d3.js under the hood
+10. my-payment-gateway - this is using StripeJS payment gateway under the hood
+11. my-component (Props:first,middle,last)- default StencilJS Component
+12. my-button (Props:label,variant)
+13. parent-component (uses embed-component inside it)
+14. embed-component
+15. simple-form (Props: first-name, last-name; form built using ionic components)
+16. complex-ionic-form  (form built using ionic components)
+17. custom-form (uses combo-box and custom-text-input)
+178. combo-box (Props:allow-input, label) -> takes time in React to show arbitrary input in dropdown, foucus out of the field after typing 
+19. custom-text-input (uses AttachInternals from StencilJS)
+20. new-card
 
 # to find to see the origin of ur local Repo which is in github.
 git remote -v
