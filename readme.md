@@ -21,6 +21,7 @@ then in app.component.html (Angular)/ App.tsx(React) ,
 they can be added as simple tag with any attribute as property in dash-case
 such as:
 ```html
+<json-schema-form [schema]= "formSchema | json"></json-schema-form>
 <my-card user-name="CodingLocker"></my-card>
 <my-pie-chart  data='[{"tag":"height","value":180},{"tag":"weight","value":75},{"tag":"age","value":30},{"tag":"score","value":95},{"tag":"yearsExperience","value":5}]'></my-pie-chart>
 <my-rich-text-editor initial-value="this is initial value" placeholder="angular placeholder"></my-rich-text-editor>
@@ -46,6 +47,8 @@ first way is include in ur StencilJS component (so that Lazy loading can work):
 import { defineCustomElements } from 'stenciljs-components/loader';
 // Initialize the custom elements
 defineCustomElements(window);
+```
+
 IF above way doesnt work due to some js not loading or resouurce not found for this build time library,
 then include below code in src/index.html as run-time library
 ```html
@@ -55,7 +58,7 @@ then include below code in src/index.html as run-time library
 ```
 
 # This component Library has currently 20 components:
-1. json-schema-form (creates dynamic form with field type like 'select','array', 'text', 'combo-box', 'radio','textarea','my-rich-text-editor','checkbox'. It take properties like type,name,label ,required.  Fields can be conditionally rendered also with ConditionalOn)
+1. json-schema-form (Props:schema, creates dynamic form with field type like 'select','array', 'text', 'combo-box', 'radio','textarea','my-rich-text-editor','checkbox'. It take properties like type,name,label ,required.  Fields can be conditionally rendered also with ConditionalOn)
 2. my-progress-bar (Props:value,max)
 3. my-rich-text-editor (Props:initial-value,placeholder,disabled,disableQuickbars,fontFamily,fontSize)  - this is using tinymce under the hood
 4. my-progress-ring (Props: percentage, round-linecap, disable-digits,event-id) - this is using easing-animation-frames as dependency
@@ -78,8 +81,11 @@ then include below code in src/index.html as run-time library
 
 # to find to see the origin of ur local Repo which is in github.
 git remote -v
+
 Determine the origin of a cloned Git repository
+
 git ls-remote --get-url origin
+
 git remote show origin
 
 

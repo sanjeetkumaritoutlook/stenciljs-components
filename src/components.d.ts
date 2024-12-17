@@ -5,11 +5,13 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { FormConfig } from "./types/form-config";
 import { apiData } from "./components/my-button/types";
 import { EasingType } from "easing-animation-frames";
 import { ColorChangeEventPayload, EventPayload, ProgressEventPayload } from "./components/my-progress-ring/my-progress-ring";
 import { RouterHistory } from "@stencil/router";
 import { AdvancedType, SlideValue } from "./components/slider-component/slider-component";
+export { FormConfig } from "./types/form-config";
 export { apiData } from "./components/my-button/types";
 export { EasingType } from "easing-animation-frames";
 export { ColorChangeEventPayload, EventPayload, ProgressEventPayload } from "./components/my-progress-ring/my-progress-ring";
@@ -30,6 +32,12 @@ export namespace Components {
     interface CustomForm {
     }
     interface CustomTextInput {
+    }
+    interface DynamicFormGenerator {
+        /**
+          * External form schema
+         */
+        "schema": FormConfig[];
     }
     interface EmbedComponent {
         "color": string;
@@ -293,6 +301,12 @@ declare global {
     var HTMLCustomTextInputElement: {
         prototype: HTMLCustomTextInputElement;
         new (): HTMLCustomTextInputElement;
+    };
+    interface HTMLDynamicFormGeneratorElement extends Components.DynamicFormGenerator, HTMLStencilElement {
+    }
+    var HTMLDynamicFormGeneratorElement: {
+        prototype: HTMLDynamicFormGeneratorElement;
+        new (): HTMLDynamicFormGeneratorElement;
     };
     interface HTMLEmbedComponentElementEventMap {
         "write": string;
@@ -565,6 +579,7 @@ declare global {
         "complex-ionic-form": HTMLComplexIonicFormElement;
         "custom-form": HTMLCustomFormElement;
         "custom-text-input": HTMLCustomTextInputElement;
+        "dynamic-form-generator": HTMLDynamicFormGeneratorElement;
         "embed-component": HTMLEmbedComponentElement;
         "json-schema-form": HTMLJsonSchemaFormElement;
         "lazy-img": HTMLLazyImgElement;
@@ -608,6 +623,12 @@ declare namespace LocalJSX {
     }
     interface CustomTextInput {
         "onCustomInput"?: (event: CustomTextInputCustomEvent<string>) => void;
+    }
+    interface DynamicFormGenerator {
+        /**
+          * External form schema
+         */
+        "schema"?: FormConfig[];
     }
     interface EmbedComponent {
         "color"?: string;
@@ -812,6 +833,7 @@ declare namespace LocalJSX {
         "complex-ionic-form": ComplexIonicForm;
         "custom-form": CustomForm;
         "custom-text-input": CustomTextInput;
+        "dynamic-form-generator": DynamicFormGenerator;
         "embed-component": EmbedComponent;
         "json-schema-form": JsonSchemaForm;
         "lazy-img": LazyImg;
@@ -848,6 +870,7 @@ declare module "@stencil/core" {
             "complex-ionic-form": LocalJSX.ComplexIonicForm & JSXBase.HTMLAttributes<HTMLComplexIonicFormElement>;
             "custom-form": LocalJSX.CustomForm & JSXBase.HTMLAttributes<HTMLCustomFormElement>;
             "custom-text-input": LocalJSX.CustomTextInput & JSXBase.HTMLAttributes<HTMLCustomTextInputElement>;
+            "dynamic-form-generator": LocalJSX.DynamicFormGenerator & JSXBase.HTMLAttributes<HTMLDynamicFormGeneratorElement>;
             "embed-component": LocalJSX.EmbedComponent & JSXBase.HTMLAttributes<HTMLEmbedComponentElement>;
             "json-schema-form": LocalJSX.JsonSchemaForm & JSXBase.HTMLAttributes<HTMLJsonSchemaFormElement>;
             "lazy-img": LocalJSX.LazyImg & JSXBase.HTMLAttributes<HTMLLazyImgElement>;

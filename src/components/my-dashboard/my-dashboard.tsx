@@ -42,7 +42,7 @@ export class MyDashboard {
           <ion-route url='/' component='app-home'></ion-route>
           <ion-route url='/profile/:name' component='app-profile'></ion-route>
         </ion-router>
-        <ion-nav></ion-nav>
+        {/* <ion-nav></ion-nav> */}
         </ion-page>
         </ion-app>
     );
