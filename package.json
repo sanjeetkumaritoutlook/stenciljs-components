@@ -1,6 +1,6 @@
 {
   "name": "stenciljs-components",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "A collection of StencilJS UI components.",
   "homepage": "https://sanjeetkumaritoutlook.github.io/stenciljs-components/",
   "main": "dist/index.cjs.js",
