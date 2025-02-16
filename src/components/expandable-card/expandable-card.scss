@@ -24,9 +24,9 @@ $themes: (
 
   @each $theme, $colors in $themes {
     &.#{$theme} {
-      background-color: map-get($colors, bg);
-      color: map-get($colors, text);
-      border-color: map-get($colors, border);
+      background-color: map.get($colors, bg);
+      color: map.get($colors, text);
+      border-color: map.get($colors, border);
     }
   }
 
@@ -85,11 +85,11 @@ $button-styles: (
 
   @each $type, $colors in $button-styles {
     &.#{$type} {
-      background-color: map-get($colors, bg);
-      color: map-get($colors, text);
+      background-color: map.get($colors, bg);
+      color: map.get($colors, text);
 
       &:hover {
-        background-color: map-get($colors, hover);
+        background-color: map.get($colors, hover);
       }
     }
   }

@@ -1,0 +1,103 @@
+Step 5: Manually Check SCSS Compilation
+To confirm SCSS compiles outside of Stencil, try running:
+npx sass src/components/expandable-card/expandable-card.scss
+
+
+D:\Sanjeet\StencilJS\stenciljs-components>npx sass src/components/expandable-card/expandable-card.scss
+Deprecation Warning [global-builtin]: Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+Use map.get instead.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+   ╷
+27 │       background-color: map-get($colors, bg);
+   │                         ^^^^^^^^^^^^^^^^^^^^
+   ╵
+    src\components\expandable-card\expandable-card.scss 27:25  root stylesheet
+
+Deprecation Warning [global-builtin]: Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+Use map.get instead.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+   ╷
+28 │       color: map-get($colors, text);
+   │              ^^^^^^^^^^^^^^^^^^^^^^
+   ╵
+    src\components\expandable-card\expandable-card.scss 28:14  root stylesheet
+
+Deprecation Warning [global-builtin]: Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+Use map.get instead.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+   ╷
+29 │       border-color: map-get($colors, border);
+   │                     ^^^^^^^^^^^^^^^^^^^^^^^^
+   ╵
+    src\components\expandable-card\expandable-card.scss 29:21  root stylesheet
+
+Deprecation Warning [global-builtin]: Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+Use map.get instead.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+   ╷
+88 │       background-color: map-get($colors, bg);
+   │                         ^^^^^^^^^^^^^^^^^^^^
+   ╵
+    src\components\expandable-card\expandable-card.scss 88:25  root stylesheet
+
+Deprecation Warning [global-builtin]: Global built-in functions are deprecated and will be removed in Dart Sass 3.0.0.
+Use map.get instead.
+
+More info and automated migrator: https://sass-lang.com/d/import
+
+   ╷
+89 │       color: map-get($colors, text);
+   │              ^^^^^^^^^^^^^^^^^^^^^^
+   ╵
+    src\components\expandable-card\expandable-card.scss 89:14  root stylesheet
+
+Warning: 1 repetitive deprecation warnings omitted.
+Run in verbose mode to see all warnings.
+
+
+Possible Outputs:
+1️⃣ ✅ If SCSS compiles successfully, then the issue is with Stencil not picking it up (check stencil.config.ts).
+2️⃣ ❌ If SCSS does not compile, then the issue is with the SCSS syntax itself.
+
+The SCSS file is compiling but throwing deprecation warnings because you're using the old map-get() function. Stencil is still processing SCSS, but Sass is warning you about outdated syntax.
+
+🔍 Why is This Happening?
+The old syntax (map-get()) is deprecated.
+Sass now requires map.get() instead.
+
+ Solution: Update SCSS Syntax
+Fix map-get() → Use map.get() Instead
+🔴 Old (Deprecated)
+
+====
+background-color: map-get($colors, bg);
+color: map-get($colors, text);
+border-color: map-get($colors, border);
+
+✅ New (Fix)
+background-color: map.get($colors, bg);
+color: map.get($colors, text);
+border-color: map.get($colors, border);
+
+ Fix All Warnings Automatically
+Instead of fixing manually, run this automated Sass migration command:
+
+npx sass-migrator global-builtin src/components/expandable-card/expandable-card.scss
+
+It will automatically convert all deprecated syntax to the new format.
+
+Final Steps
+Run the migration command (or update manually).
+Restart your Stencil app:
+npm run start
+
+Check if SCSS is now applying correctly in the browser.
+
