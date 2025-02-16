@@ -42,6 +42,40 @@ export namespace Components {
     interface EmbedComponent {
         "color": string;
     }
+    interface ExpandableCard {
+        /**
+          * Button Text
+         */
+        "buttonText": string;
+        /**
+          * Button Type
+         */
+        "buttonType": 'primary' | 'secondary';
+        /**
+          * Card Content
+         */
+        "content": string;
+        /**
+          * Expandable Card Toggle
+         */
+        "expandable": boolean;
+        /**
+          * Image URL
+         */
+        "imageUrl": string;
+        /**
+          * Card Label
+         */
+        "label": string;
+        /**
+          * Link (If provided, card is clickable)
+         */
+        "link": string;
+        /**
+          * Card Theme
+         */
+        "theme": 'light' | 'dark' | 'primary' | 'danger';
+    }
     interface JsonSchemaForm {
         "schema": string;
     }
@@ -325,6 +359,12 @@ declare global {
         prototype: HTMLEmbedComponentElement;
         new (): HTMLEmbedComponentElement;
     };
+    interface HTMLExpandableCardElement extends Components.ExpandableCard, HTMLStencilElement {
+    }
+    var HTMLExpandableCardElement: {
+        prototype: HTMLExpandableCardElement;
+        new (): HTMLExpandableCardElement;
+    };
     interface HTMLJsonSchemaFormElement extends Components.JsonSchemaForm, HTMLStencilElement {
     }
     var HTMLJsonSchemaFormElement: {
@@ -581,6 +621,7 @@ declare global {
         "custom-text-input": HTMLCustomTextInputElement;
         "dynamic-form-generator": HTMLDynamicFormGeneratorElement;
         "embed-component": HTMLEmbedComponentElement;
+        "expandable-card": HTMLExpandableCardElement;
         "json-schema-form": HTMLJsonSchemaFormElement;
         "lazy-img": HTMLLazyImgElement;
         "my-button": HTMLMyButtonElement;
@@ -633,6 +674,40 @@ declare namespace LocalJSX {
     interface EmbedComponent {
         "color"?: string;
         "onWrite"?: (event: EmbedComponentCustomEvent<string>) => void;
+    }
+    interface ExpandableCard {
+        /**
+          * Button Text
+         */
+        "buttonText"?: string;
+        /**
+          * Button Type
+         */
+        "buttonType"?: 'primary' | 'secondary';
+        /**
+          * Card Content
+         */
+        "content"?: string;
+        /**
+          * Expandable Card Toggle
+         */
+        "expandable"?: boolean;
+        /**
+          * Image URL
+         */
+        "imageUrl"?: string;
+        /**
+          * Card Label
+         */
+        "label"?: string;
+        /**
+          * Link (If provided, card is clickable)
+         */
+        "link"?: string;
+        /**
+          * Card Theme
+         */
+        "theme"?: 'light' | 'dark' | 'primary' | 'danger';
     }
     interface JsonSchemaForm {
         "schema"?: string;
@@ -835,6 +910,7 @@ declare namespace LocalJSX {
         "custom-text-input": CustomTextInput;
         "dynamic-form-generator": DynamicFormGenerator;
         "embed-component": EmbedComponent;
+        "expandable-card": ExpandableCard;
         "json-schema-form": JsonSchemaForm;
         "lazy-img": LazyImg;
         "my-button": MyButton;
@@ -872,6 +948,7 @@ declare module "@stencil/core" {
             "custom-text-input": LocalJSX.CustomTextInput & JSXBase.HTMLAttributes<HTMLCustomTextInputElement>;
             "dynamic-form-generator": LocalJSX.DynamicFormGenerator & JSXBase.HTMLAttributes<HTMLDynamicFormGeneratorElement>;
             "embed-component": LocalJSX.EmbedComponent & JSXBase.HTMLAttributes<HTMLEmbedComponentElement>;
+            "expandable-card": LocalJSX.ExpandableCard & JSXBase.HTMLAttributes<HTMLExpandableCardElement>;
             "json-schema-form": LocalJSX.JsonSchemaForm & JSXBase.HTMLAttributes<HTMLJsonSchemaFormElement>;
             "lazy-img": LocalJSX.LazyImg & JSXBase.HTMLAttributes<HTMLLazyImgElement>;
             "my-button": LocalJSX.MyButton & JSXBase.HTMLAttributes<HTMLMyButtonElement>;

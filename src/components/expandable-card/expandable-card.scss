@@ -1,0 +1,105 @@
+$border-radius: 8px;
+$padding: 16px;
+$transition-speed: 0.3s;
+
+// Themes
+$themes: (
+  light: (bg: white, text: black, border: #ddd),
+  dark: (bg: #333, text: white, border: #444),
+  primary: (bg: #007bff, text: white, border: #0056b3),
+  danger: (bg: #dc3545, text: white, border: #a71d2a),
+);
+
+.card {
+  position: relative;
+  border-radius: $border-radius;
+  padding: 0;
+  border: 1px solid;
+  text-align: center;
+  width: 250px;
+  margin: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform $transition-speed ease-in-out, box-shadow $transition-speed ease-in-out;
+
+  @each $theme, $colors in $themes {
+    &.#{$theme} {
+      background-color: map-get($colors, bg);
+      color: map-get($colors, text);
+      border-color: map-get($colors, border);
+    }
+  }
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+  }
+}
+
+// Image
+.card-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+// Content
+.card-content {
+  padding: $padding;
+}
+
+// Expand Icon
+.expand-icon {
+  font-size: 16px;
+  margin-left: 8px;
+}
+
+// Expandable Content
+.extra-content {
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+// Show Expanded Content
+.extra-content.expanded {
+  max-height: 100px;
+  opacity: 1;
+}
+
+// Button Styles
+$button-styles: (
+  primary: (bg: #007bff, text: white, hover: #0056b3),
+  secondary: (bg: gray, text: white, hover: #505050),
+);
+
+.card-button {
+  margin-top: 10px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color $transition-speed ease-in-out;
+
+  @each $type, $colors in $button-styles {
+    &.#{$type} {
+      background-color: map-get($colors, bg);
+      color: map-get($colors, text);
+
+      &:hover {
+        background-color: map-get($colors, hover);
+      }
+    }
+  }
+}
+
+// Clickable Overlay for Link
+.click-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}

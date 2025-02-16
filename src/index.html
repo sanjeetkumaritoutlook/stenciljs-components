@@ -16,7 +16,17 @@
     <my-progress-bar value="2" max="10"></my-progress-bar>
     <my-rich-text-editor initial-value="this is initial value" placeholder="sanjeet rte mvp" font-family="Arial" font-size="12pt"></my-rich-text-editor>
     <my-rich-text-editor placeholder="second RTE" font-family="Roboto" font-size="14pt"></my-rich-text-editor>
-   <my-progress-ring percentage="30"></my-progress-ring>
+   <!-- Expandable Card with Animation -->
+<expandable-card 
+theme="dark" 
+label="Expandable Card" 
+content="Click to expand for more details."
+button-text="Read More"
+button-type="secondary"
+image-url="https://picsum.photos/200/300?random=1"
+expandable="true">
+</expandable-card>
+    <my-progress-ring percentage="30"></my-progress-ring>
    <my-progress-ring percentage="60" round-linecap="true"></my-progress-ring>
    <my-progress-ring percentage="90" disable-digits="true" event-id="ring1">
      <p class="completed-count">9/10<br>Complete</p>
