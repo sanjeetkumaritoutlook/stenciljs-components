@@ -1,0 +1,14 @@
+a StencilJS component that implements a datepicker in the DD MMMM YYYY format (e.g., 21 December 2024). It uses the native HTML date input and formats the selected date using JavaScript.
+
+✅ Features of This Component:
+✔ Uses native date input (<input type="date">) for easy selection
+✔ Formats the date in DD MMMM YYYY format (e.g., 21 December 2024)
+✔ Uses Intl.DateTimeFormat for locale-based formatting
+✔ Supports default value and updates state dynamically
+
+🚀 How to Use This Component
+Add <my-datepicker></my-datepicker> inside your HTML or another Stencil component.
+🎯 What Happens?
+Initially, it shows today's date formatted as DD MMMM YYYY (e.g., 14 February 2025).
+When you select a date using the native date picker, it automatically updates the formatted output.
+This is a lightweight, dependency-free solution! 

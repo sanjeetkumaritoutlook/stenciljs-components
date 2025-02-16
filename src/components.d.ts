@@ -109,6 +109,8 @@ export namespace Components {
     }
     interface MyDashboard {
     }
+    interface MyDatepicker {
+    }
     interface MyName {
         "name": string;
     }
@@ -423,6 +425,12 @@ declare global {
         prototype: HTMLMyDashboardElement;
         new (): HTMLMyDashboardElement;
     };
+    interface HTMLMyDatepickerElement extends Components.MyDatepicker, HTMLStencilElement {
+    }
+    var HTMLMyDatepickerElement: {
+        prototype: HTMLMyDatepickerElement;
+        new (): HTMLMyDatepickerElement;
+    };
     interface HTMLMyNameElementEventMap {
         "myEvent": any;
     }
@@ -628,6 +636,7 @@ declare global {
         "my-card": HTMLMyCardElement;
         "my-component": HTMLMyComponentElement;
         "my-dashboard": HTMLMyDashboardElement;
+        "my-datepicker": HTMLMyDatepickerElement;
         "my-name": HTMLMyNameElement;
         "my-payment-gateway": HTMLMyPaymentGatewayElement;
         "my-pie-chart": HTMLMyPieChartElement;
@@ -743,6 +752,8 @@ declare namespace LocalJSX {
         "middle"?: string;
     }
     interface MyDashboard {
+    }
+    interface MyDatepicker {
     }
     interface MyName {
         "name"?: string;
@@ -917,6 +928,7 @@ declare namespace LocalJSX {
         "my-card": MyCard;
         "my-component": MyComponent;
         "my-dashboard": MyDashboard;
+        "my-datepicker": MyDatepicker;
         "my-name": MyName;
         "my-payment-gateway": MyPaymentGateway;
         "my-pie-chart": MyPieChart;
@@ -955,6 +967,7 @@ declare module "@stencil/core" {
             "my-card": LocalJSX.MyCard & JSXBase.HTMLAttributes<HTMLMyCardElement>;
             "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
             "my-dashboard": LocalJSX.MyDashboard & JSXBase.HTMLAttributes<HTMLMyDashboardElement>;
+            "my-datepicker": LocalJSX.MyDatepicker & JSXBase.HTMLAttributes<HTMLMyDatepickerElement>;
             "my-name": LocalJSX.MyName & JSXBase.HTMLAttributes<HTMLMyNameElement>;
             "my-payment-gateway": LocalJSX.MyPaymentGateway & JSXBase.HTMLAttributes<HTMLMyPaymentGatewayElement>;
             "my-pie-chart": LocalJSX.MyPieChart & JSXBase.HTMLAttributes<HTMLMyPieChartElement>;
