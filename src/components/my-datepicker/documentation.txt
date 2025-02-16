@@ -54,3 +54,16 @@ The calendar input remains hidden, ensuring a clean UI.
 ✔ No extra text or elements—fully inside the input field.
 
 🚀 This is the best way to show a formatted date in StencilJS!
+
+🎯 Console Output Example (Selecting 21 December 2024)
+📅 Selected Date Formats:
+✔ DD MMMM YYYY: 21 December 2024
+✔ DD-MM-YYYY: 21-12-2024
+✔ ISO String: 2024-12-21T00:00:00.000Z
+
+What This Update Adds:
+✔ Logs different formats to the console when a date is selected.
+✔ Supports ISO format, DD-MM-YYYY, and DD MMMM YYYY.
+✔ Works seamlessly with the hidden date picker.
+
+🚀 This should cover all your formatting needs!

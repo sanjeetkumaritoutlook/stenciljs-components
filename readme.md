@@ -48,6 +48,7 @@ such as:
   image-url="https://picsum.photos/200/300?random=3"
   link="https://www.google.com">
 </expandable-card>
+<my-datepicker></my-datepicker>
 ```
 
 # for usage in an another Application created using StencilJS: 
@@ -66,7 +67,7 @@ then include below code in src/index.html as run-time library
  
 ```
 
-# This component Library has currently 21 components:
+# This component Library has currently 22 components:
 1. json-schema-form (Props:schema, creates dynamic form with field type like 'select','array', 'text', 'combo-box', 'radio','textarea','my-rich-text-editor','checkbox'. It take properties like type,name,label ,required.  Fields can be conditionally rendered also with ConditionalOn)
 2. my-progress-bar (Props:value,max)
 3. my-rich-text-editor (Props:initial-value,placeholder,disabled,disableQuickbars,fontFamily,fontSize)  - this is using tinymce under the hood
@@ -88,6 +89,7 @@ then include below code in src/index.html as run-time library
 19. custom-text-input (uses AttachInternals from StencilJS)
 20. new-card
 21. expandable-card (Props:label,content,expandable,theme,imageUrl,buttonText,buttonType)
+22. my-datepicker
 
 # to find to see the origin of ur local Repo which is in github.
 git remote -v
