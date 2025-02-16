@@ -12,3 +12,45 @@ Add <my-datepicker></my-datepicker> inside your HTML or another Stencil componen
 Initially, it shows today's date formatted as DD MMMM YYYY (e.g., 14 February 2025).
 When you select a date using the native date picker, it automatically updates the formatted output.
 This is a lightweight, dependency-free solution! 
+
+====
+no <p> tag
+
+You want the selected date to be shown inside the input field itself, formatted as DD MMMM YYYY (e.g., 21 December 2024).
+
+Since <input type="date"> only supports YYYY-MM-DD, we need to:
+
+Store the selected date as YYYY-MM-DD (for compatibility).
+Show the formatted date (DD MMMM YYYY) inside the input field.
+Handle user selection & formatting dynamically.
+
+
+How This Works
+Initially, the input field is empty (placeholder="Select a date").
+When the user clicks the input field, it changes to a date picker (type="date").
+When a date is selected, it:
+Stores the raw YYYY-MM-DD format (for logic).
+Converts and displays DD MMMM YYYY inside the input field.
+When the input loses focus, it reverts back to text mode (hiding the default browser format).
+
+Final Result
+✔ The date picker works as expected.
+✔ Formatted date (DD MMMM YYYY) appears inside the input field.
+✔ No extra text—everything happens inside the input field itself.
+
+Solution: Use a Hidden Native Date Input
+To make the calendar work, we need:
+✔ A hidden <input type="date"> (it will open the calendar).
+✔ A visible text input to display the formatted date.
+✔ Clicking the text input triggers the hidden calendar.
+
+🎯 How This Works
+User clicks the text input → The hidden calendar opens.
+User selects a date → The date is formatted (DD MMMM YYYY) and displayed inside the text field.
+The calendar input remains hidden, ensuring a clean UI.
+ Final Output
+✔ Clicking the input opens the date picker.
+✔ Formatted date (21 December 2024) appears in the input field.
+✔ No extra text or elements—fully inside the input field.
+
+🚀 This is the best way to show a formatted date in StencilJS!

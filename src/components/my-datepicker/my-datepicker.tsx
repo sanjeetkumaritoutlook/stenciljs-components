@@ -6,30 +6,47 @@ import { Component, State, h } from '@stencil/core';
   shadow: true,
 })
 export class MyDatepicker {
-  @State() selectedDate: string = this.formatDate(new Date());
+  @State() selectedDate: string = ''; // Stores YYYY-MM-DD format
+  @State() displayDate: string = ''; // Stores formatted display
 
-  // Function to format the date as "DD MMMM YYYY"
-  private formatDate(date: Date): string {
+  private dateInput!: HTMLInputElement; // Reference to the hidden date input
+
+  // Format the date as "DD MMMM YYYY"
+  private formatDate(date: string): string {
     return new Intl.DateTimeFormat('en-GB', {
       day: '2-digit',
       month: 'long',
       year: 'numeric',
-    }).format(date);
+    }).format(new Date(date));
   }
 
-  // Handle date change event
+  // Handle date selection from the hidden input
   private handleDateChange(event: Event) {
     const input = event.target as HTMLInputElement;
     if (input.value) {
-      this.selectedDate = this.formatDate(new Date(input.value));
+      this.selectedDate = input.value; // Keep original YYYY-MM-DD
+      this.displayDate = this.formatDate(input.value); // Display formatted date
     }
   }
 
   render() {
     return (
       <div class="datepicker-container">
-        <input type="date" onInput={(event) => this.handleDateChange(event)} />
-        <p class="formatted-date">{this.selectedDate}</p>
+        {/* Visible text input (displays formatted date) */}
+        <input
+          type="text"
+          placeholder="Select a date"
+          value={this.displayDate}
+          readonly
+          onClick={() => this.dateInput.showPicker()} // Open the hidden calendar
+        />
+
+        {/* Hidden native date input */}
+        <input
+          type="date"
+          ref={(el) => (this.dateInput = el as HTMLInputElement)}
+          onInput={(event) => this.handleDateChange(event)}
+        />
       </div>
     );
   }
