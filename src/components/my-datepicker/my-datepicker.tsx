@@ -1,4 +1,4 @@
-import { Component, State, h } from '@stencil/core';
+import { Component, Prop, State, h } from '@stencil/core';
 
 @Component({
   tag: 'my-datepicker',
@@ -6,6 +6,8 @@ import { Component, State, h } from '@stencil/core';
   shadow: true,
 })
 export class MyDatepicker {
+  @Prop() formatted: boolean = false; // Optional prop to toggle date formatting
+
   @State() selectedDate: string = ''; // Stores YYYY-MM-DD format
   @State() displayDate: string = ''; // Stores formatted display
 
@@ -20,8 +22,8 @@ export class MyDatepicker {
     }).format(new Date(date));
   }
 
-  // Function to log different formats to the console
-  private logDateFormats(date: string) {
+   // Function to log different formats to the console
+   private logDateFormats(date: string) {
     const dateObj = new Date(date);
     const formattedDDMMYYYY = `${dateObj.getDate().toString().padStart(2, '0')}-${(dateObj.getMonth() + 1)
       .toString()
@@ -34,13 +36,13 @@ export class MyDatepicker {
     console.log("✔ DD-MM-YYYY:", formattedDDMMYYYY);
     console.log("✔ ISO String:", isoFormat);
   }
-
+  
   // Handle date selection from the hidden input
   private handleDateChange(event: Event) {
     const input = event.target as HTMLInputElement;
     if (input.value) {
       this.selectedDate = input.value; // Keep original YYYY-MM-DD
-      this.displayDate = this.formatDate(input.value); // Display formatted date
+      this.displayDate = this.formatted ? this.formatDate(input.value) : this.selectedDate; // Conditional display
       this.logDateFormats(input.value); // Log formats to console
     }
   }
@@ -48,8 +50,7 @@ export class MyDatepicker {
   render() {
     return (
       <div class="datepicker-container">
-        {/* Visible text input (displays formatted date) */}
-        <h3>Datepicker display date in DD MMMM YYYY</h3>
+        <h3>Datepicker</h3>
         <input
           type="text"
           placeholder="Select a date"

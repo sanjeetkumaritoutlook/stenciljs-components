@@ -110,6 +110,7 @@ export namespace Components {
     interface MyDashboard {
     }
     interface MyDatepicker {
+        "formatted": boolean;
     }
     interface MyName {
         "name": string;
@@ -754,6 +755,7 @@ declare namespace LocalJSX {
     interface MyDashboard {
     }
     interface MyDatepicker {
+        "formatted"?: boolean;
     }
     interface MyName {
         "name"?: string;

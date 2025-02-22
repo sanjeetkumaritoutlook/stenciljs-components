@@ -48,7 +48,7 @@ such as:
   image-url="https://picsum.photos/200/300?random=3"
   link="https://www.google.com">
 </expandable-card>
-<my-datepicker></my-datepicker>
+<my-datepicker formatted="true"></my-datepicker>
 ```
 
 # for usage in an another Application created using StencilJS: 
@@ -89,7 +89,7 @@ then include below code in src/index.html as run-time library
 19. custom-text-input (uses AttachInternals from StencilJS)
 20. new-card
 21. expandable-card (Props:label,content,expandable,theme,imageUrl,buttonText,buttonType)
-22. my-datepicker
+22. my-datepicker (Props:formatted)
 
 # to find to see the origin of ur local Repo which is in github.
 git remote -v
