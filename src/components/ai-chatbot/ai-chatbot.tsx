@@ -1,4 +1,4 @@
-import { Component, h, State, Prop, Event, EventEmitter } from "@stencil/core";
+import { Component, h, State,  Event, EventEmitter } from "@stencil/core";
 
 @Component({
   tag: "ai-chatbot",
@@ -6,7 +6,7 @@ import { Component, h, State, Prop, Event, EventEmitter } from "@stencil/core";
   shadow: true,
 })
 export class AiChatbot {
-  @Prop() apiKey: string; // Pass Gemini API Key as a prop
+  private apiKey = 'AIzaSyCY1gGGu-DUsmlGhRbQbjleKqtg_hIPbd4';
   @State() messages: { role: string; text: string }[] = [];
   @State() userInput: string = "";
   @Event() messageSent: EventEmitter<string>;
@@ -15,28 +15,35 @@ export class AiChatbot {
     if (!this.userInput.trim()) return;
 
     const userMessage = { role: "User", text: this.userInput };
-    this.messages = [...this.messages, userMessage];
+    this.messages = [...(this.messages || []), userMessage];  // ✅ Ensure messages is always an array
     this.userInput = "";
     this.messageSent.emit(userMessage.text);
 
     // Call Gemini API
+    //2️⃣ Check for null or undefined Data from API
+    //try-catch block to handle undefined API responses gracefully:
     try {
-      const response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          contents: [{ role: "user", parts: [{ text: userMessage.text }] }],
-          apiKey: this.apiKey,
-        }),
-      });
-
+      const response = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${this.apiKey}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            contents: [{ role: "user", parts: [{ text: userMessage.text }] }],
+          }),
+        }
+      );
+    
       const data = await response.json();
-      const botReply = data?.candidates?.[0]?.content?.parts?.[0]?.text || "No response";
-
+      const botReply =
+        data?.candidates?.[0]?.content?.parts?.[0]?.text || "No response from AI";
+    
       this.messages = [...this.messages, { role: "AI", text: botReply }];
     } catch (error) {
       console.error("Error fetching AI response:", error);
+      this.messages = [...this.messages, { role: "AI", text: "Error retrieving response." }];
     }
+    
   }
 
   render() {
@@ -44,13 +51,15 @@ export class AiChatbot {
       <div class="chat-container">
         <h3>AI chatbot</h3>
         <div class="messages">
-          {this.messages.map((msg) => (
-            <div class={`message ${msg.role.toLowerCase()}`}>
-              <span class="avatar">{msg.role === "User" ? "👤" : "🤖"}</span>
-              <p innerHTML={msg.text.replace(/\n/g, "<br>")}></p>
-            </div>
-          ))}
+  {Array.isArray(this.messages) &&
+    this.messages.map((msg) => (
+      <div class={`message ${msg.role.toLowerCase()}`}>
+        <span class="avatar">{msg.role === "User" ? "👤" : "🤖"}</span>
+        <p innerHTML={msg.text.replace(/\n/g, "<br>")}></p>
+      </div>
+    ))}
         </div>
+
 
         <div class="input-area">
           <input type="text" value={this.userInput} onInput={(e: any) => (this.userInput = e.target.value)} placeholder="Type a message..." />

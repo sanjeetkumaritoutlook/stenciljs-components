@@ -49,6 +49,7 @@ such as:
   link="https://www.google.com">
 </expandable-card>
 <my-datepicker formatted="true"></my-datepicker>
+<ai-chatbot></ai-chatbot>
 ```
 
 # for usage in an another Application created using StencilJS: 
@@ -67,7 +68,7 @@ then include below code in src/index.html as run-time library
  
 ```
 
-# This component Library has currently 22 components:
+# This component Library has currently 23 components:
 1. json-schema-form (Props:schema, creates dynamic form with field type like 'select','array', 'text', 'combo-box', 'radio','textarea','my-rich-text-editor','checkbox'. It take properties like type,name,label ,required.  Fields can be conditionally rendered also with ConditionalOn)
 2. my-progress-bar (Props:value,max)
 3. my-rich-text-editor (Props:initial-value,placeholder,disabled,disableQuickbars,fontFamily,fontSize)  - this is using tinymce under the hood
@@ -90,7 +91,7 @@ then include below code in src/index.html as run-time library
 20. new-card
 21. expandable-card (Props:label,content,expandable,theme,imageUrl,buttonText,buttonType)
 22. my-datepicker (Props:formatted)
-
+23. ai-chatbot
 # to find to see the origin of ur local Repo which is in github.
 git remote -v
 

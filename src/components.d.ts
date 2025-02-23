@@ -19,7 +19,6 @@ export { RouterHistory } from "@stencil/router";
 export { AdvancedType, SlideValue } from "./components/slider-component/slider-component";
 export namespace Components {
     interface AiChatbot {
-        "apiKey": string;
     }
     interface AppHome {
     }
@@ -684,7 +683,6 @@ declare global {
 }
 declare namespace LocalJSX {
     interface AiChatbot {
-        "apiKey"?: string;
         "onMessageSent"?: (event: AiChatbotCustomEvent<string>) => void;
     }
     interface AppHome {

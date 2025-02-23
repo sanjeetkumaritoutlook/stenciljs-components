@@ -1,6 +1,6 @@
 {
   "name": "stenciljs-components",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "description": "A collection of StencilJS UI components.",
   "homepage": "https://sanjeetkumaritoutlook.github.io/stenciljs-components/",
   "main": "dist/index.cjs.js",
@@ -55,6 +55,7 @@
     "@storybook/web-components-webpack5": "^8.4.7",
     "@types/jest": "^29.5.6",
     "@types/node": "^16.18.11",
+    "dotenv": "^16.4.7",
     "jest": "^29.7.0",
     "jest-cli": "^29.7.0",
     "lit": "^3.2.1",
