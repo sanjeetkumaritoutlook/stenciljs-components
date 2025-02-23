@@ -18,6 +18,9 @@ export { ColorChangeEventPayload, EventPayload, ProgressEventPayload } from "./c
 export { RouterHistory } from "@stencil/router";
 export { AdvancedType, SlideValue } from "./components/slider-component/slider-component";
 export namespace Components {
+    interface AiChatbot {
+        "apiKey": string;
+    }
     interface AppHome {
     }
     interface AppProfile {
@@ -232,6 +235,10 @@ export namespace Components {
         "columns": string;
     }
 }
+export interface AiChatbotCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLAiChatbotElement;
+}
 export interface ComboBoxCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLComboBoxElement;
@@ -281,6 +288,23 @@ export interface TestButtonCustomEvent<T> extends CustomEvent<T> {
     target: HTMLTestButtonElement;
 }
 declare global {
+    interface HTMLAiChatbotElementEventMap {
+        "messageSent": string;
+    }
+    interface HTMLAiChatbotElement extends Components.AiChatbot, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLAiChatbotElementEventMap>(type: K, listener: (this: HTMLAiChatbotElement, ev: AiChatbotCustomEvent<HTMLAiChatbotElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLAiChatbotElementEventMap>(type: K, listener: (this: HTMLAiChatbotElement, ev: AiChatbotCustomEvent<HTMLAiChatbotElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLAiChatbotElement: {
+        prototype: HTMLAiChatbotElement;
+        new (): HTMLAiChatbotElement;
+    };
     interface HTMLAppHomeElement extends Components.AppHome, HTMLStencilElement {
     }
     var HTMLAppHomeElement: {
@@ -622,6 +646,7 @@ declare global {
         new (): HTMLUsersCardsElement;
     };
     interface HTMLElementTagNameMap {
+        "ai-chatbot": HTMLAiChatbotElement;
         "app-home": HTMLAppHomeElement;
         "app-profile": HTMLAppProfileElement;
         "combo-box": HTMLComboBoxElement;
@@ -658,6 +683,10 @@ declare global {
     }
 }
 declare namespace LocalJSX {
+    interface AiChatbot {
+        "apiKey"?: string;
+        "onMessageSent"?: (event: AiChatbotCustomEvent<string>) => void;
+    }
     interface AppHome {
     }
     interface AppProfile {
@@ -915,6 +944,7 @@ declare namespace LocalJSX {
         "columns"?: string;
     }
     interface IntrinsicElements {
+        "ai-chatbot": AiChatbot;
         "app-home": AppHome;
         "app-profile": AppProfile;
         "combo-box": ComboBox;
@@ -954,6 +984,7 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "ai-chatbot": LocalJSX.AiChatbot & JSXBase.HTMLAttributes<HTMLAiChatbotElement>;
             "app-home": LocalJSX.AppHome & JSXBase.HTMLAttributes<HTMLAppHomeElement>;
             "app-profile": LocalJSX.AppProfile & JSXBase.HTMLAttributes<HTMLAppProfileElement>;
             "combo-box": LocalJSX.ComboBox & JSXBase.HTMLAttributes<HTMLComboBoxElement>;
