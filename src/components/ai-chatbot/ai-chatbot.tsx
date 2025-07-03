@@ -6,7 +6,7 @@ import { Component, h, State,  Event, EventEmitter } from "@stencil/core";
   shadow: true,
 })
 export class AiChatbot {
-  private apiKey = 'AIzaSyCY1gGGu-DUsmlGhRbQbjleKqtg_hIPbd4';
+  private apiKey = 'AIzaSyDmiqX9g45O5wBK_zIF8-c0Q3oFNd5a0uM';
   @State() messages: { role: string; text: string }[] = [];
   @State() userInput: string = "";
   @Event() messageSent: EventEmitter<string>;
@@ -24,7 +24,7 @@ export class AiChatbot {
     //try-catch block to handle undefined API responses gracefully:
     try {
       const response = await fetch(
-        `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-pro:generateContent?key=${this.apiKey}`,
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${this.apiKey}`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
